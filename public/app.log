@@ -1,0 +1,969 @@
+2025-11-14 16:59:28,725 - INFO - === START: perform_conversion ===
+2025-11-14 16:59:28,725 - INFO - File path: C:\xampp\htdocs\HourTrack\HourTrack\storage\app/public/python/DailyAttendance.csv
+2025-11-14 16:59:28,725 - INFO - Output directory: C:\xampp\htdocs\HourTrack\HourTrack\public\python/
+2025-11-14 16:59:28,725 - INFO - Loading schedule_adjustments + employee_management join...
+2025-11-14 16:59:28,731 - INFO - Loaded 23 temporary schedule rows.
+2025-11-14 16:59:28,744 - INFO - Temp schedule dict created for 13 employees.
+2025-11-14 16:59:28,744 - INFO - Loading employee_management schedules...
+2025-11-14 16:59:28,747 - INFO - Loaded 289 employee schedules.
+2025-11-14 16:59:28,761 - INFO - Loading attendance file...
+2025-11-14 16:59:28,764 - INFO - Loaded attendance file with 58 rows.
+2025-11-14 16:59:28,764 - INFO - Preparing data (datetime parsing, sorting)...
+2025-11-14 16:59:28,769 - INFO - Remaining valid attendance records: 58
+2025-11-14 16:59:28,770 - INFO - Processing DAZO, ANTONIO | NightShift=False | Temp={} | Normal=7-19
+2025-11-14 16:59:28,775 - INFO - DAZO, ANTONIO | 2025-09-01 | Late=False (0h 0m)
+2025-11-14 16:59:28,779 - INFO - DAZO, ANTONIO | 2025-09-02 | Late=False (0h 0m)
+2025-11-14 16:59:28,782 - INFO - DAZO, ANTONIO | 2025-09-03 | Late=False (0h 0m)
+2025-11-14 16:59:28,786 - INFO - DAZO, ANTONIO | 2025-09-04 | Late=False (0h 0m)
+2025-11-14 16:59:28,792 - INFO - DAZO, ANTONIO | 2025-09-05 | Late=False (0h 0m)
+2025-11-14 16:59:28,796 - INFO - DAZO, ANTONIO | 2025-09-06 | Late=False (0h 0m)
+2025-11-14 16:59:28,799 - INFO - DAZO, ANTONIO | 2025-09-07 | Late=False (0h 0m)
+2025-11-14 16:59:28,802 - INFO - DAZO, ANTONIO | 2025-09-08 | Late=False (0h 0m)
+2025-11-14 16:59:28,805 - INFO - DAZO, ANTONIO | 2025-09-09 | Late=False (0h 0m)
+2025-11-14 16:59:28,810 - INFO - DAZO, ANTONIO | 2025-09-10 | Late=False (0h 0m)
+2025-11-14 16:59:28,817 - INFO - DAZO, ANTONIO | 2025-09-11 | Late=False (0h 0m)
+2025-11-14 16:59:28,820 - INFO - DAZO, ANTONIO | 2025-09-12 | Late=False (0h 0m)
+2025-11-14 16:59:28,824 - INFO - DAZO, ANTONIO | 2025-09-13 | Late=False (0h 0m)
+2025-11-14 16:59:28,829 - INFO - DAZO, ANTONIO | 2025-09-14 | Late=False (0h 0m)
+2025-11-14 16:59:28,832 - INFO - DAZO, ANTONIO | 2025-09-15 | Late=False (0h 0m)
+2025-11-14 16:59:28,835 - INFO - DAZO, ANTONIO | 2025-09-16 | Late=False (0h 0m)
+2025-11-14 16:59:28,837 - INFO - No schedule found for MARZAN, JENNY, skipping...
+2025-11-14 16:59:28,838 - INFO - Processing MILLAN, MAC RENTON | NightShift=False | Temp={} | Normal=7-19
+2025-11-14 16:59:28,842 - INFO - MILLAN, MAC RENTON | 2025-09-01 | Late=False (0h 0m)
+2025-11-14 16:59:28,846 - INFO - MILLAN, MAC RENTON | 2025-09-02 | Late=False (0h 0m)
+2025-11-14 16:59:28,851 - INFO - MILLAN, MAC RENTON | 2025-09-03 | Late=False (0h 0m)
+2025-11-14 16:59:28,854 - INFO - MILLAN, MAC RENTON | 2025-09-04 | Late=False (0h 0m)
+2025-11-14 16:59:28,861 - INFO - MILLAN, MAC RENTON | 2025-09-05 | Late=False (0h 0m)
+2025-11-14 16:59:28,864 - INFO - MILLAN, MAC RENTON | 2025-09-08 | Late=False (0h 0m)
+2025-11-14 16:59:28,867 - INFO - MILLAN, MAC RENTON | 2025-09-09 | Late=False (0h 0m)
+2025-11-14 16:59:28,871 - INFO - MILLAN, MAC RENTON | 2025-09-10 | Late=False (0h 0m)
+2025-11-14 16:59:28,876 - INFO - MILLAN, MAC RENTON | 2025-09-11 | Late=False (0h 0m)
+2025-11-14 16:59:28,880 - INFO - MILLAN, MAC RENTON | 2025-09-12 | Late=False (0h 0m)
+2025-11-14 16:59:28,885 - INFO - MILLAN, MAC RENTON | 2025-09-15 | Late=False (0h 0m)
+2025-11-14 16:59:28,887 - INFO - Total processed records: 27
+2025-11-14 16:59:28,892 - INFO - Processed DataFrame has 27 rows.
+2025-11-14 16:59:28,892 - INFO - Starting DB insertions...
+2025-11-14 16:59:28,895 - INFO - Skipping DAZO, ANTONIO on 2025-09-01 — same earliest and latest time (19:00:00).
+2025-11-14 16:59:28,954 - INFO - Skipping DAZO, ANTONIO on 2025-09-16 — same earliest and latest time (07:00:00).
+2025-11-14 16:59:28,992 - INFO - Attendance records successfully inserted into attendance_records table.
+2025-11-14 16:59:28,993 - INFO - IAS
+2025-11-14 16:59:29,044 - INFO - schedule: 7-19
+2025-11-14 16:59:29,045 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,045 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,045 - INFO - 12
+2025-11-14 16:59:29,050 - INFO - schedule: 7-19
+2025-11-14 16:59:29,050 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,050 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,050 - INFO - 12
+2025-11-14 16:59:29,054 - INFO - schedule: 7-19
+2025-11-14 16:59:29,054 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,054 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,054 - INFO - 12
+2025-11-14 16:59:29,063 - INFO - schedule: 7-19
+2025-11-14 16:59:29,063 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,063 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,063 - INFO - 12
+2025-11-14 16:59:29,068 - INFO - schedule: 7-19
+2025-11-14 16:59:29,068 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,068 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,068 - INFO - 12
+2025-11-14 16:59:29,074 - INFO - schedule: 7-19
+2025-11-14 16:59:29,074 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,074 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,075 - INFO - 12
+2025-11-14 16:59:29,083 - INFO - schedule: 7-19
+2025-11-14 16:59:29,084 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,084 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,084 - INFO - 12
+2025-11-14 16:59:29,097 - INFO - schedule: 7-19
+2025-11-14 16:59:29,097 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,097 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,097 - INFO - 12
+2025-11-14 16:59:29,105 - INFO - schedule: 7-19
+2025-11-14 16:59:29,105 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,106 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,106 - INFO - 12
+2025-11-14 16:59:29,114 - INFO - schedule: 7-19
+2025-11-14 16:59:29,114 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,114 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,114 - INFO - 12
+2025-11-14 16:59:29,124 - INFO - schedule: 7-19
+2025-11-14 16:59:29,124 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,124 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,124 - INFO - 12
+2025-11-14 16:59:29,133 - INFO - schedule: 7-19
+2025-11-14 16:59:29,134 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,134 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,134 - INFO - 12
+2025-11-14 16:59:29,141 - INFO - schedule: 7-19
+2025-11-14 16:59:29,141 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,141 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,141 - INFO - 12
+2025-11-14 16:59:29,146 - INFO - schedule: 7-19
+2025-11-14 16:59:29,146 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,147 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,147 - INFO - 12
+2025-11-14 16:59:29,156 - INFO - schedule: 7-19
+2025-11-14 16:59:29,157 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,157 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,157 - INFO - 12
+2025-11-14 16:59:29,166 - INFO - schedule: 7-19
+2025-11-14 16:59:29,167 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,167 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,167 - INFO - 12
+2025-11-14 16:59:29,176 - INFO - schedule: 7-19
+2025-11-14 16:59:29,176 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,176 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,176 - INFO - 12
+2025-11-14 16:59:29,186 - INFO - schedule: 7-19
+2025-11-14 16:59:29,186 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,186 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,186 - INFO - 12
+2025-11-14 16:59:29,195 - INFO - schedule: 7-19
+2025-11-14 16:59:29,195 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,195 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,196 - INFO - 12
+2025-11-14 16:59:29,204 - INFO - schedule: 7-19
+2025-11-14 16:59:29,204 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,204 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,204 - INFO - 12
+2025-11-14 16:59:29,213 - INFO - schedule: 7-19
+2025-11-14 16:59:29,213 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,213 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,213 - INFO - 12
+2025-11-14 16:59:29,221 - INFO - schedule: 7-19
+2025-11-14 16:59:29,222 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,222 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,222 - INFO - 12
+2025-11-14 16:59:29,233 - INFO - schedule: 7-19
+2025-11-14 16:59:29,233 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,233 - INFO - Adjusted hours: 12.0
+2025-11-14 16:59:29,233 - INFO - 12
+2025-11-14 16:59:29,234 - INFO - hours worked done
+2025-11-14 16:59:29,234 - INFO - 9999
+2025-11-14 16:59:29,235 - INFO - 12
+2025-11-14 16:59:29,235 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,235 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,243 - INFO - 123
+2025-11-14 16:59:29,244 - INFO - schedule: 7-19
+2025-11-14 16:59:29,244 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,244 - INFO - 1234
+2025-11-14 16:59:29,245 - INFO - 123456
+2025-11-14 16:59:29,245 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,246 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,246 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,246 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,246 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,246 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,247 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,247 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,247 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,247 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,247 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,248 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,248 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,248 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,248 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,248 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,248 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,248 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,249 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,249 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,249 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,249 - INFO - OT summary for DAZO, ANTONIO on 2025-09-02: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,249 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,249 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,249 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,250 - INFO - 12
+2025-11-14 16:59:29,250 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,250 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,258 - INFO - 123
+2025-11-14 16:59:29,259 - INFO - schedule: 7-19
+2025-11-14 16:59:29,259 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,259 - INFO - 1234
+2025-11-14 16:59:29,260 - INFO - 123456
+2025-11-14 16:59:29,260 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,260 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,261 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,261 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,262 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,262 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,262 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,262 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,262 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,262 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,262 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,262 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,262 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,262 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,262 - INFO - OT summary for DAZO, ANTONIO on 2025-09-03: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,263 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,263 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,263 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,263 - INFO - 12
+2025-11-14 16:59:29,263 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,263 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,268 - INFO - 123
+2025-11-14 16:59:29,269 - INFO - schedule: 7-19
+2025-11-14 16:59:29,269 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,269 - INFO - 1234
+2025-11-14 16:59:29,270 - INFO - 123456
+2025-11-14 16:59:29,270 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,270 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,270 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,270 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,270 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,271 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,271 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,271 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,271 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,271 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,271 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,271 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,271 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,271 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,272 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,272 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,272 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,272 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,273 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,273 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,273 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,273 - INFO - OT summary for DAZO, ANTONIO on 2025-09-04: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,273 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,274 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,274 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,274 - INFO - 12
+2025-11-14 16:59:29,274 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,274 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,281 - INFO - 123
+2025-11-14 16:59:29,283 - INFO - schedule: 7-19
+2025-11-14 16:59:29,283 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,283 - INFO - 1234
+2025-11-14 16:59:29,284 - INFO - 123456
+2025-11-14 16:59:29,284 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,284 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,285 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,285 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,285 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,285 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,285 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,285 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,286 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,286 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,286 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,286 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,286 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,286 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,286 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,287 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,287 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,287 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,287 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,287 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,287 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,287 - INFO - OT summary for DAZO, ANTONIO on 2025-09-05: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,287 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,287 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,287 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,287 - INFO - 12
+2025-11-14 16:59:29,288 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,288 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,295 - INFO - 123
+2025-11-14 16:59:29,296 - INFO - schedule: 7-19
+2025-11-14 16:59:29,296 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,296 - INFO - 1234
+2025-11-14 16:59:29,297 - INFO - 123456
+2025-11-14 16:59:29,297 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,297 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,297 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,297 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,297 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,298 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,298 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,298 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,298 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,298 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,298 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,299 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,299 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,299 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,299 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,299 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,299 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,300 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,300 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,300 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,300 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,301 - INFO - OT summary for DAZO, ANTONIO on 2025-09-06: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,301 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,301 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,301 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,301 - INFO - 12
+2025-11-14 16:59:29,301 - INFO - ord skip record_date: 2025-09-07
+2025-11-14 16:59:29,301 - INFO - 12
+2025-11-14 16:59:29,302 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,302 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,309 - INFO - 123
+2025-11-14 16:59:29,310 - INFO - schedule: 7-19
+2025-11-14 16:59:29,310 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,310 - INFO - 1234
+2025-11-14 16:59:29,311 - INFO - 123456
+2025-11-14 16:59:29,312 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,312 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,312 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,312 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,312 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,312 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,312 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,313 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,313 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,313 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,313 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,313 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,313 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,313 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,313 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,314 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,314 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,314 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,314 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,314 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,314 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,314 - INFO - OT summary for DAZO, ANTONIO on 2025-09-08: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,314 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,314 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,315 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,315 - INFO - 12
+2025-11-14 16:59:29,315 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,315 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,321 - INFO - 123
+2025-11-14 16:59:29,322 - INFO - schedule: 7-19
+2025-11-14 16:59:29,322 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,322 - INFO - 1234
+2025-11-14 16:59:29,324 - INFO - 123456
+2025-11-14 16:59:29,324 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,324 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,325 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,325 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,325 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,325 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,325 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,326 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,326 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,326 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,326 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,326 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,326 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,327 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,327 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,327 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,327 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,327 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,327 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,328 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,328 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,328 - INFO - OT summary for DAZO, ANTONIO on 2025-09-09: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,328 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,328 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,328 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,328 - INFO - 12
+2025-11-14 16:59:29,329 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,329 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,335 - INFO - 123
+2025-11-14 16:59:29,336 - INFO - schedule: 7-19
+2025-11-14 16:59:29,336 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,336 - INFO - 1234
+2025-11-14 16:59:29,337 - INFO - 123456
+2025-11-14 16:59:29,337 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,338 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,340 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,340 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,340 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,340 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,340 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,341 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,341 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,341 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,341 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,341 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,341 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,342 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,342 - INFO - OT summary for DAZO, ANTONIO on 2025-09-10: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,342 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,342 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,342 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,342 - INFO - 12
+2025-11-14 16:59:29,342 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,342 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,350 - INFO - 123
+2025-11-14 16:59:29,351 - INFO - schedule: 7-19
+2025-11-14 16:59:29,351 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,351 - INFO - 1234
+2025-11-14 16:59:29,352 - INFO - 123456
+2025-11-14 16:59:29,352 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,352 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,353 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,353 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,353 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,353 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,353 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,354 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,354 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,354 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,354 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,354 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,354 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,355 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,355 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,355 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,355 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,355 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,355 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,356 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,356 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,356 - INFO - OT summary for DAZO, ANTONIO on 2025-09-11: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,356 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,356 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,356 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,357 - INFO - 12
+2025-11-14 16:59:29,357 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,357 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,365 - INFO - 123
+2025-11-14 16:59:29,366 - INFO - schedule: 7-19
+2025-11-14 16:59:29,366 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,366 - INFO - 1234
+2025-11-14 16:59:29,367 - INFO - 123456
+2025-11-14 16:59:29,367 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,367 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,368 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,369 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,369 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,369 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,369 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,369 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,369 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,369 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,369 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,369 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,370 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,370 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,370 - INFO - OT summary for DAZO, ANTONIO on 2025-09-12: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,370 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,370 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,370 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,370 - INFO - 12
+2025-11-14 16:59:29,370 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,370 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,378 - INFO - 123
+2025-11-14 16:59:29,379 - INFO - schedule: 7-19
+2025-11-14 16:59:29,379 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,379 - INFO - 1234
+2025-11-14 16:59:29,380 - INFO - 123456
+2025-11-14 16:59:29,381 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,381 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,381 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,381 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,381 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,381 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,382 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,382 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,382 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,382 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,382 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,382 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,382 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,382 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,382 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,383 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,383 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,383 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,383 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,383 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,383 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,383 - INFO - OT summary for DAZO, ANTONIO on 2025-09-13: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,383 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,384 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,384 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,384 - INFO - 12
+2025-11-14 16:59:29,384 - INFO - ord skip record_date: 2025-09-14
+2025-11-14 16:59:29,384 - INFO - 12
+2025-11-14 16:59:29,384 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,385 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,391 - INFO - 123
+2025-11-14 16:59:29,391 - INFO - schedule: 7-19
+2025-11-14 16:59:29,392 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,392 - INFO - 1234
+2025-11-14 16:59:29,394 - INFO - 123456
+2025-11-14 16:59:29,394 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,394 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,394 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,394 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,395 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,395 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,395 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,395 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,395 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,396 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,396 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,396 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,396 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,396 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,396 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,397 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,397 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,397 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,397 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,397 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,397 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,397 - INFO - OT summary for DAZO, ANTONIO on 2025-09-15: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,397 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,398 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,398 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,398 - INFO - 12
+2025-11-14 16:59:29,398 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,398 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,405 - INFO - 123
+2025-11-14 16:59:29,405 - INFO - schedule: 7-19
+2025-11-14 16:59:29,406 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,406 - INFO - 1234
+2025-11-14 16:59:29,407 - INFO - 123456
+2025-11-14 16:59:29,408 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,409 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,409 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,410 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,410 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,410 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,410 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,410 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,410 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,410 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,410 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,410 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,410 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,410 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-01: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,411 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,411 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,411 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,411 - INFO - 12
+2025-11-14 16:59:29,411 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,412 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,417 - INFO - 123
+2025-11-14 16:59:29,418 - INFO - schedule: 7-19
+2025-11-14 16:59:29,418 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,418 - INFO - 1234
+2025-11-14 16:59:29,419 - INFO - 123456
+2025-11-14 16:59:29,419 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,419 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,419 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,419 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,419 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,420 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,420 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,420 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,420 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,420 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,421 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,421 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,421 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,421 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,421 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,422 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,422 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,422 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,422 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,422 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,422 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,422 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-02: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,422 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,422 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,422 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,422 - INFO - 12
+2025-11-14 16:59:29,423 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,423 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,432 - INFO - 123
+2025-11-14 16:59:29,433 - INFO - schedule: 7-19
+2025-11-14 16:59:29,433 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,433 - INFO - 1234
+2025-11-14 16:59:29,433 - INFO - 123456
+2025-11-14 16:59:29,433 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,434 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,435 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,435 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,435 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,435 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,435 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,435 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,435 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,435 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,435 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,435 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,435 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,436 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,436 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-03: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,436 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,436 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,436 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,436 - INFO - 12
+2025-11-14 16:59:29,436 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,436 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,443 - INFO - 123
+2025-11-14 16:59:29,444 - INFO - schedule: 7-19
+2025-11-14 16:59:29,444 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,444 - INFO - 1234
+2025-11-14 16:59:29,445 - INFO - 123456
+2025-11-14 16:59:29,445 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,445 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,446 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,446 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,446 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,446 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,446 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,446 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,447 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,447 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,447 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,447 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,447 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,447 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,448 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,448 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,448 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,448 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,448 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,448 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,448 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,449 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-04: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,449 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,449 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,449 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,449 - INFO - 12
+2025-11-14 16:59:29,449 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,449 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,456 - INFO - 123
+2025-11-14 16:59:29,458 - INFO - schedule: 7-19
+2025-11-14 16:59:29,458 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,458 - INFO - 1234
+2025-11-14 16:59:29,459 - INFO - 123456
+2025-11-14 16:59:29,459 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,459 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,459 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,459 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,459 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,460 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,460 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,460 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,460 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,460 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,460 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,460 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,460 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,460 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,461 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,461 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,461 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,461 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,461 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,461 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,461 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,461 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-05: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,461 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,462 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,462 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,462 - INFO - 12
+2025-11-14 16:59:29,462 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,462 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,470 - INFO - 123
+2025-11-14 16:59:29,471 - INFO - schedule: 7-19
+2025-11-14 16:59:29,472 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,472 - INFO - 1234
+2025-11-14 16:59:29,473 - INFO - 123456
+2025-11-14 16:59:29,473 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,474 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,474 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,474 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,474 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,474 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,474 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,475 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,475 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,475 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,475 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,475 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,475 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,475 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,475 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,476 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,476 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,476 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,476 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,476 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,476 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,476 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-08: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,477 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,477 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,477 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,478 - INFO - 12
+2025-11-14 16:59:29,478 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,478 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,485 - INFO - 123
+2025-11-14 16:59:29,485 - INFO - schedule: 7-19
+2025-11-14 16:59:29,486 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,486 - INFO - 1234
+2025-11-14 16:59:29,486 - INFO - 123456
+2025-11-14 16:59:29,486 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,487 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,487 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,487 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,487 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,487 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,487 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,487 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,488 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,488 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,488 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,488 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,488 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,488 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,488 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,489 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,489 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,489 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,490 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,490 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,490 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,490 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-09: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,490 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,491 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,491 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,491 - INFO - 12
+2025-11-14 16:59:29,491 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,491 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,498 - INFO - 123
+2025-11-14 16:59:29,499 - INFO - schedule: 7-19
+2025-11-14 16:59:29,499 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,499 - INFO - 1234
+2025-11-14 16:59:29,499 - INFO - 123456
+2025-11-14 16:59:29,499 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,501 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,502 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,502 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,502 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,502 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,502 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,502 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,502 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,502 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,502 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,502 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,503 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,503 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,503 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-10: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,503 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,503 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,503 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,503 - INFO - 12
+2025-11-14 16:59:29,503 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,503 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,511 - INFO - 123
+2025-11-14 16:59:29,511 - INFO - schedule: 7-19
+2025-11-14 16:59:29,512 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,512 - INFO - 1234
+2025-11-14 16:59:29,512 - INFO - 123456
+2025-11-14 16:59:29,512 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,513 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,513 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,513 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,513 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,513 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,514 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,514 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,514 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,514 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,514 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,514 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,515 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,515 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,515 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,515 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,515 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,515 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,515 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,515 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,516 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,516 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-11: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,516 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,516 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,516 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,516 - INFO - 12
+2025-11-14 16:59:29,517 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,517 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,523 - INFO - 123
+2025-11-14 16:59:29,524 - INFO - schedule: 7-19
+2025-11-14 16:59:29,524 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,524 - INFO - 1234
+2025-11-14 16:59:29,525 - INFO - 123456
+2025-11-14 16:59:29,525 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,525 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,525 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,526 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,526 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,527 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,527 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,527 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,527 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,527 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,527 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,527 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,527 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,527 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,527 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-12: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,528 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,528 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,528 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,528 - INFO - 12
+2025-11-14 16:59:29,528 - INFO - type of earliest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,528 - INFO - type of latest time<class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+2025-11-14 16:59:29,535 - INFO - 123
+2025-11-14 16:59:29,536 - INFO - schedule: 7-19
+2025-11-14 16:59:29,536 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,536 - INFO - 1234
+2025-11-14 16:59:29,536 - INFO - 123456
+2025-11-14 16:59:29,537 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,537 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,537 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,537 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,537 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,538 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,538 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,538 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,538 - INFO - In Total OT accumulated: 0 days 00:00:00
+2025-11-14 16:59:29,538 - INFO - In Total OT accumulated: 0 days 01:00:00
+2025-11-14 16:59:29,538 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,539 - INFO - In Total OT accumulated: 0 days 02:00:00
+2025-11-14 16:59:29,539 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,539 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,539 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,539 - INFO - In Total OT accumulated: 0 days 03:00:00
+2025-11-14 16:59:29,539 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,539 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,539 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,539 - INFO - Processing OT block: 0 days 01:00:00, ND=False
+2025-11-14 16:59:29,539 - INFO -   Counted OT chunks: 0 days 01:00:00
+2025-11-14 16:59:29,541 - INFO - OT summary for MILLAN, MAC RENTON on 2025-09-15: ord_ot=0 days 06:00:00, ord_nd=0 days 00:00:00, ord_nd_ot=0 days 00:00:00
+2025-11-14 16:59:29,541 - INFO - ord_ot=21600.0, ord_nd=0.0, ord_nd_ot=0.0, condition=False
+2025-11-14 16:59:29,541 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,541 - INFO - Error auto-calculating ORD: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,542 - INFO - ORD DONE
+2025-11-14 16:59:29,582 - INFO - schedule: 7-19
+2025-11-14 16:59:29,582 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,583 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,583 - INFO - Error auto\u2010calculating RD overtime: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,618 - INFO - schedule: 7-19
+2025-11-14 16:59:29,618 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,620 - INFO - Security (day shift) fixed OT = 4.0
+2025-11-14 16:59:29,620 - INFO - Error auto\u2010calculating RD overtime: log_security_db() missing 1 required positional argument: 'attendance_records_id'
+2025-11-14 16:59:29,688 - INFO - RD OT DONE
+2025-11-14 16:59:29,699 - INFO - schedule: 7-19
+2025-11-14 16:59:29,699 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,708 - INFO - schedule: 7-19
+2025-11-14 16:59:29,708 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,714 - INFO - schedule: 7-19
+2025-11-14 16:59:29,714 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,719 - INFO - schedule: 7-19
+2025-11-14 16:59:29,719 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,724 - INFO - schedule: 7-19
+2025-11-14 16:59:29,724 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,728 - INFO - schedule: 7-19
+2025-11-14 16:59:29,728 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,729 - INFO - Security (day shift) fixed RD = 4.0
+2025-11-14 16:59:29,741 - INFO - schedule: 7-19
+2025-11-14 16:59:29,742 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,747 - INFO - schedule: 7-19
+2025-11-14 16:59:29,747 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,752 - INFO - schedule: 7-19
+2025-11-14 16:59:29,753 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,758 - INFO - schedule: 7-19
+2025-11-14 16:59:29,758 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,765 - INFO - schedule: 7-19
+2025-11-14 16:59:29,765 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,769 - INFO - schedule: 7-19
+2025-11-14 16:59:29,769 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,774 - INFO - schedule: 7-19
+2025-11-14 16:59:29,775 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,776 - INFO - Security (day shift) fixed RD = 4.0
+2025-11-14 16:59:29,784 - INFO - schedule: 7-19
+2025-11-14 16:59:29,785 - INFO - Auto-detected DAY schedule (7-19) for security: DAZO, ANTONIO
+2025-11-14 16:59:29,789 - INFO - schedule: 7-19
+2025-11-14 16:59:29,789 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,794 - INFO - schedule: 7-19
+2025-11-14 16:59:29,794 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,799 - INFO - schedule: 7-19
+2025-11-14 16:59:29,800 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,805 - INFO - schedule: 7-19
+2025-11-14 16:59:29,805 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,810 - INFO - schedule: 7-19
+2025-11-14 16:59:29,810 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,815 - INFO - schedule: 7-19
+2025-11-14 16:59:29,815 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,819 - INFO - schedule: 7-19
+2025-11-14 16:59:29,821 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,828 - INFO - schedule: 7-19
+2025-11-14 16:59:29,829 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,833 - INFO - schedule: 7-19
+2025-11-14 16:59:29,834 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,838 - INFO - schedule: 7-19
+2025-11-14 16:59:29,838 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,844 - INFO - schedule: 7-19
+2025-11-14 16:59:29,844 - INFO - Auto-detected DAY schedule (7-19) for security: MILLAN, MAC RENTON
+2025-11-14 16:59:29,844 - INFO - RD DONE
