@@ -216,7 +216,7 @@
                 <div class="bg-white px-6 py-3 rounded-t-lg border-b border-gray-200 flex items-center justify-between">
                     <h2 class="text-2xl font-bold text-gray-900 flex items-center">
                         <i class="fa-regular fa-calendar-check text-3xl mr-2" style="color: #8DE11A;"></i>
-                        Certificate of Attendance
+                        Certificate of Attendance Status
                     </h2>
                 </div>
                 <div class="p-6 flex-1 flex justify-center items-center relative" style="height: 300px;">
@@ -436,7 +436,7 @@
                         const ctx = document.getElementById('scheduleAdjustmentStatusChart').getContext(
                             '2d');
                         const chartContainer = $('#scheduleAdjustmentStatusChart')
-                    .parent(); // parent container
+                            .parent(); // parent container
 
                         // Check if response has data
                         const hasData = response.data && response.data.some(value => value > 0);
@@ -525,13 +525,29 @@
                     }
                 });
             });
-
             document.addEventListener("DOMContentLoaded", function() {
                 fetch("/certificate-attendance-summary")
                     .then(response => response.json())
                     .then(data => {
-                        const ctx = document.getElementById("certificateOfAttendanceChart").getContext("2d");
+                        const chartContainer = document.getElementById("certificateOfAttendanceChartContainer");
+                        const canvas = document.getElementById("certificateOfAttendanceChart");
+                        const ctx = canvas.getContext("2d");
 
+                        const hasData = data.data && data.data.some(value => value > 0);
+
+                        // Show "No Data" UI
+                        if (!hasData) {
+                            chartContainer.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-64 text-gray-500">
+                        <i class="fa-solid fa-chart-pie text-5xl mb-3 text-gray-400"></i>
+                        <p class="text-lg font-semibold text-gray-600">No certificate data available</p>
+                        <p class="text-sm text-gray-400">Data will appear once records are submitted</p>
+                    </div>
+                `;
+                            return;
+                        }
+
+                        // Render chart when data exists
                         new Chart(ctx, {
                             type: "doughnut",
                             data: {
@@ -568,8 +584,8 @@
                                             label: function(context) {
                                                 let label = context.label || "";
                                                 let value = context.parsed;
-                                                let total = context.chart._metasets[context
-                                                    .datasetIndex].total;
+                                                let total = context.dataset.data.reduce((a, b) => a + b,
+                                                    0);
                                                 let percentage = ((value / total) * 100).toFixed(1) +
                                                     "%";
                                                 return `${label}: ${value} (${percentage})`;
@@ -582,7 +598,7 @@
                                             weight: "bold"
                                         },
                                         formatter: (value, ctx) => {
-                                            const total = ctx.chart._metasets[ctx.datasetIndex].total;
+                                            const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
                                             const percentage = ((value / total) * 100).toFixed(1);
                                             return percentage + "%";
                                         }
@@ -591,8 +607,19 @@
                             },
                             plugins: [ChartDataLabels]
                         });
+                    })
+                    .catch(() => {
+                        const chartContainer = document.getElementById("certificateOfAttendanceChartContainer");
+                        chartContainer.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-64 text-gray-500">
+                    <i class="fa-solid fa-triangle-exclamation text-5xl mb-3 text-red-400"></i>
+                    <p class="text-lg font-semibold text-gray-700">Failed to load data</p>
+                    <p class="text-sm text-gray-400">Please try again later</p>
+                </div>
+            `;
                     });
             });
+
             $(document).ready(function() {
                 $.ajax({
                     url: "{{ route('overtime.status.summary') }}",

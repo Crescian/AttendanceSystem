@@ -293,6 +293,17 @@
         loader.style.display = "flex";
         loader.classList.remove("opacity-0");
     });
+
+    
+    window.addEventListener("pageshow", function(event) {
+        if (event.persisted) {
+            const loader = document.getElementById("page-loader");
+            if (loader) {
+                loader.style.display = "none";
+                loader.classList.add("opacity-0");
+            }
+        }
+    });
 </script>
 
 </html>

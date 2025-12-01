@@ -14,14 +14,25 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $data = Schedule::all();
+        $data = Schedule::orderByRaw("
+                CASE schedule_shift
+                    WHEN 'Day Shift' THEN 1
+                    WHEN 'Night Shift' THEN 2
+                    ELSE 3
+                END
+            ")
+            ->orderByRaw("CAST(split_part(schedule_name, '-', 1) AS INTEGER)")
+            ->get();
+
         return response()->json($data);
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
         //

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeManagement;
+use App\Models\Department;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -65,9 +66,10 @@ class EmployeeManagementController extends Controller
                 'unique_id'     => trim($row[0]),
                 'employee_name' => isset($row[1]) ? trim($row[1]) : null,
                 'basic_salary'  => isset($row[2]) ? trim($row[2]) : null,
-                // 'schedule'  => isset($row[3]) ? trim($row[3]) : null,
-                // 'report_to'  => isset($row[4]) ? trim($row[4]) : null,
-                // 'department'  => isset($row[5]) ? trim($row[5]) : null,
+                'schedule' => isset($row[3]) ? str_replace('a', '', trim($row[3])) : null,
+                'report_to'  => isset($row[4]) ? trim($row[4]) : null,
+                'department' => isset($row[5]) ? strtoupper(trim($row[5])) : null,
+                'status'  => isset($row[6]) ? trim($row[6]) : null
             ];
         }
 
@@ -111,7 +113,8 @@ class EmployeeManagementController extends Controller
                 'basic_salary',
                 'department',
                 'report_to',
-                'schedule'
+                'schedule',
+                'status',
             ])->orderBy('unique_id', 'asc');
 
             // Apply department filter only if userRole is not admin
@@ -141,12 +144,25 @@ class EmployeeManagementController extends Controller
 
         return response()->json($uniqueIds);
     }
+    // public function edit($id)
+    // {
+    //     // Fetch the employee by ID
+    //     $employee = EmployeeManagement::findOrFail($id);
+
+    //     // Return the employee details as JSON
+    //     return response()->json($employee);
+    // }
+
     public function edit($id)
     {
-        // Fetch the employee by ID
-        $employee = EmployeeManagement::findOrFail($id);
+        $employee = EmployeeManagement::join('departments', 'employee_management.department', '=', 'departments.department_name')
+            ->select(
+                'employee_management.*',
+                'departments.id as department_id'
+            )
+            ->where('employee_management.id', $id)
+            ->firstOrFail();
 
-        // Return the employee details as JSON
         return response()->json($employee);
     }
 
@@ -244,6 +260,7 @@ class EmployeeManagementController extends Controller
             'department' => $request->employeeAddDepartment ?? null, // Optional if your DB has this field
             'schedule' => $request->employeeAddSchedule,
             'report_to' => $request->employeeAddImmediateSupervisor,
+            'status' => $request->employeeAddStatus
         ]);
 
         // Append data to the CSV file
@@ -322,6 +339,7 @@ class EmployeeManagementController extends Controller
         $employee->department = $request->input('department');
         $employee->report_to = $request->input('report_to');
         $employee->schedule = $request->input('schedule');
+        $employee->status = $request->input('status');
         $employee->save(); // Save the updated employee details
 
         // Update the CSV file

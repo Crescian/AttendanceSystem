@@ -15,6 +15,7 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         // ✅ Get all departments with department head name
@@ -24,6 +25,7 @@ class DepartmentController extends Controller
                 'users.name as department_head_name'
             )
             ->leftJoin('users', 'users.id', '=', 'departments.department_head')
+            ->orderBy('departments.department_name', 'ASC') // 🔥 Order alphabetically
             ->get();
 
         return response()->json([
@@ -31,12 +33,13 @@ class DepartmentController extends Controller
             'data' => $departments
         ]);
     }
-    
     public function getUserDepartment()
     {
         $userId = Auth::id(); // ✅ get logged-in user ID
 
-        $department = Department::where('department_head', $userId)->first();
+        $department = Department::where('department_head', $userId)
+            ->orderBy('department_head', 'asc') // ✅ added order by
+            ->first();
 
         if ($department) {
             return response()->json([

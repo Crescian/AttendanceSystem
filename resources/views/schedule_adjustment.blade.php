@@ -190,7 +190,7 @@
                                     <th class="px-4 py-2 text-white">Reason</th>
                                     <th class="px-4 py-2 text-white">Date</th>
                                     <th class="px-4 py-2 text-white">Approval Status</th>
-                                    <th class="px-4 py-2 text-white">Action</th>
+                                    <th class="px-4 py-2 text-white" style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="overtime-body" class="text-sm text-gray-800 divide-y divide-gray-200">
@@ -297,7 +297,7 @@
                     </div>
                 </div>
                 <!-- Attachment Upload -->
-                <div class="mt-6">
+                {{-- <div class="mt-6">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Attachment (Optional)</label>
 
                     <div id="dropZone"
@@ -313,15 +313,15 @@
                         </p>
                         <p class="text-xs text-gray-500">Supports JPG, PNG, PDF (Max 5MB)</p>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Modal Footer -->
                 <div class="flex justify-end space-x-4 pt-4">
-                    <button type="button" onclick="closeAddCertificateModal()"
+                    <button type="button" onclick="closeAddScheduleAdjustmentModal()"
                         class="bg-gray-300 hover:bg-gray-400 text-sm px-4 py-2 rounded shadow-md">
                         Cancel
                     </button>
-                    <button type="submit" onclick="submitCertificateOfAttendance();"
+                    <button type="submit" onclick="submitScheduleAdjustment();"
                         class="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded shadow-md">
                         Add Schedule Adjustment
                     </button>
@@ -421,6 +421,39 @@
             </div>
         </div>
     </div>
+    <!-- Skipped Records Modal -->
+    <div id="skippedEmployeesModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b pb-2 mb-4">
+                <h3 class="text-lg font-semibold text-gray-800 flex items-center space-x-2">
+                    <i class="fas fa-exclamation-triangle text-yellow-500 fa-beat" style="font-size: 1.2rem;"></i>
+                    <span>Skipped Attendance Records</span>
+                </h3>
+                <button onclick="closeSkippedModal()"
+                    class="text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+            </div>
+
+            <!-- Body -->
+            <p class="text-sm text-gray-600 mb-3">
+                The following employees already have attendance for the selected date(s):
+            </p>
+
+            <div id="skippedEmployeesList"
+                class="max-h-60 overflow-y-auto border rounded-md p-3 space-y-2 bg-gray-50">
+                <!-- Skipped employees will be inserted here dynamically -->
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end mt-4">
+                <button onclick="closeSkippedModal()"
+                    class="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded shadow-md">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -484,13 +517,16 @@
                 type: "POST",
                 data: scheduleData,
                 success: function(response) {
+                    console.log('Schedule save response:', response);
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: response.message || 'Schedule saved successfully!',
+                        icon: (response.skipped?.length || 0) > 0 ? 'warning' : 'success',
+                        title: (response.skipped?.length || 0) > 0 ? 'Warning' : 'Success',
+                        text: response.message,
+                        timer: 2000,
+                        showConfirmButton: false
                     });
                     console.log(response.data);
-                    loadSchedule()
+                    // loadSchedule()
                 },
                 error: function(err) {
                     Swal.fire({
@@ -588,7 +624,12 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
 
                     $.ajax({
                         url: "{{ route('scheduleAdjustment.counts') }}",
@@ -626,14 +667,21 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     setTimeout(() => {
                         let table = $('#schedule-adjustment-table').DataTable({
                             // processing: true,
                             serverSide: true,
                             autoWidth: false,
                             responsive: true,
-                            lengthChange: false,
+                            lengthChange: true, // only keep this
+                            lengthMenu: [10, 20, 50], // page length options
+                            pageLength: 50, // default rows per page
                             dom: '<"flex justify-between items-center mb-4"Bf>rt<"flex justify-between items-center mt-4"lip>',
                             ajax: {
                                 url: "{{ route('schedule.adjustment') }}",
@@ -788,7 +836,12 @@
                                 {
                                     data: 'record_date',
                                     name: 'record_date',
-                                    className: 'px-6 py-4 text-gray-700 text-center border-r border-gray-100'
+                                    className: 'px-6 py-4 text-sm text-gray-800 border-r border-gray-100 text-center',
+                                    render: function(data) {
+                                        if (!data) return '';
+                                        // Keep only the date part before the space
+                                        return data.split(' ')[0];
+                                    }
                                 },
                                 {
                                     data: 'approval_status',
@@ -814,27 +867,34 @@
                                         switch (row.approval_status) {
                                             case 'Pending':
                                                 return `
-                                <div class="flex items-center justify-center space-x-2">
-                                    <button
-                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-all duration-200 hover:scale-105"
-                                        onclick="approveScheduleAdjustment(${row.id});">
-                                        Approve
-                                    </button>
-                                    <button
-                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transform transition-all duration-200 hover:scale-105"
-                                        onclick="cancelScheduleAdjustment(${row.id});">
-                                        Cancel
-                                    </button>
-                                </div>`;
+                                                <div class="flex justify-center space-x-2">
+                                                    <button onclick="approveScheduleAdjustment(${row.id})"
+                                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button onclick="cancelScheduleAdjustment(${row.id})"
+                                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                    `;
                                             case 'Approved':
                                                 return `
-                                <button
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transform transition-all duration-200 hover:scale-105"
-                                    onclick="cancelScheduleAdjustment(${row.id});">
-                                    Cancel
-                                </button>`;
+                                                <div class="flex items-center justify-center space-x-2">
+                                                        <button onclick="cancelScheduleAdjustment(${row.id})"
+                                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    `;
                                             case 'Cancelled':
-                                                return `<span class="text-red-600 font-semibold">Cancelled</span>`;
+                                                return `
+                                                    <div class="flex items-center justify-center space-x-2">
+                                                        <button onclick="handleRedo(${row.id})"
+                                                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                            <i class="fas fa-undo"></i>
+                                                        </button>
+                                                    </div>`;
                                             default:
                                                 return '';
                                         }
@@ -968,7 +1028,12 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     $.ajax({
                         url: "{{ route('employee.fetch.employeename') }}",
                         method: 'GET',
@@ -995,7 +1060,7 @@
         let timeInputArray = [];
 
 
-        function submitCertificateOfAttendance() {
+        function submitScheduleAdjustment() {
             let attendanceArray = []; // final result
 
             $.each(formattedD, function(index, date) {
@@ -1037,6 +1102,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
+                        // Show SweetAlert for success
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -1044,6 +1110,11 @@
                             timer: 2000,
                             showConfirmButton: false
                         });
+
+                        // Show Skipped Records Modal if there are skipped records
+                        if (response.skipped && response.skipped.length > 0) {
+                            showSkippedModal(response.skipped);
+                        }
                     },
                     error: function(xhr) {
                         let errorMsg = "An error occurred";
@@ -1076,6 +1147,39 @@
 
             $('#schedule-adjustment-table').DataTable().ajax.reload();
             loadScheduleAdjustmentCounts();
+        }
+
+        function showSkippedModal(skippedList) {
+            const modal = document.getElementById("skippedEmployeesModal");
+            const listContainer = document.getElementById("skippedEmployeesList");
+            listContainer.innerHTML = "";
+
+            if (skippedList.length === 0) {
+                listContainer.innerHTML = `<p class="text-gray-600 text-sm">No skipped records.</p>`;
+            } else {
+                skippedList.forEach(item => {
+                    const div = document.createElement("div");
+                    div.classList.add(
+                        "flex", "justify-between", "items-center", "bg-white", "border",
+                        "rounded-md", "p-2", "shadow-sm"
+                    );
+                    div.innerHTML = `
+                <span class="text-gray-700 text-sm font-medium">${item.employee_name}</span>
+                <span class="text-gray-500 text-xs">${item.record_date || item.date}</span>
+            `;
+                    listContainer.appendChild(div);
+                });
+            }
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        // Close modal function
+        function closeSkippedModal() {
+            const modal = document.getElementById("skippedEmployeesModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
         }
 
         // function addLogHours(date, dateFormatted, weekday) {
@@ -1183,7 +1287,8 @@
                 console.log("Adding:", formattedDate, weekday);
 
                 addLogHours(formattedDate, formatDateYMD(selectedDate), weekday);
-                loadSchedule()
+                $('.scheduleSelect').html(''); // Clear existing options
+                loadSchedule();
             });
 
             console.log(formattedD);
@@ -1275,6 +1380,10 @@
         // // Add View Schedule Modal Functions
         function closeViewScheduleModal() {
             document.getElementById('viewScheduleModal').classList.replace('flex', 'hidden');
+        }
+
+        function closeAddScheduleAdjustmentModal() {
+            document.getElementById('addScheduleAdjustmentModal').classList.replace('flex', 'hidden');
         }
     </script>
 </x-app-layout>

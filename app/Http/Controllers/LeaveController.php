@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 use App\Models\BiometricHistoryList;
+use App\Models\EmployeeManagement;
 
 class LeaveController extends Controller
 {
@@ -198,43 +199,242 @@ class LeaveController extends Controller
      */
 
     public function store(Request $request)
-    {
-        $biometricImportId = $this->biometricHistoryList->getLoadedRecordId();
-        $request->validate([
-            'leaveArray' => 'required|array',
-            'leaveArray.*.employee_management_id' => 'required|integer',
-            'leaveArray.*.record_date' => [
-                'required',
-                'date',
-                function ($attribute, $value, $fail) use ($request) {
-                    $index = explode('.', $attribute)[1];
-                    $employeeId = $request->leaveArray[$index]['employee_management_id'];
+{
+    $biometricImportId = $this->biometricHistoryList->getLoadedRecordId();
 
-                    $exists = Leave::where('employee_management_id', $employeeId)
-                        ->where('record_date', $value)
-                        ->exists();
+    // Validate request
+    $request->validate([
+        'leaveArray' => 'required|array',
+        'leaveArray.*.employee_management_id' => 'required|integer',
+        'leaveArray.*.record_date' => 'required|date',
+        'leaveArray.*.reason' => 'nullable|string',
+        'leaveArray.*.status' => 'nullable|string',
+    ]);
 
-                    if ($exists) {
-                        $fail("Leave for employee ID {$employeeId} on {$value} already exists.");
-                    }
-                }
-            ],
-        ]);
+    $createdRecords = 0;
+    $skippedRecords = [];
 
-        foreach ($request->leaveArray as $leave) {
-            Leave::create([
-                'employee_management_id' => $leave['employee_management_id'],
-                'leave_type' => $leave['leave_type'],
-                'reason' => $leave['reason'] ?? null,
-                'record_date' => $leave['record_date'],
-                'status' => $leave['status'] ?? 'pending',
-                'with_pay' => $leave['with_pay'] ?? 'No',
-                'biometric_imports_id' => $biometricImportId,
-            ]);
+    foreach ($request->leaveArray as $leave) {
+        $employeeId = $leave['employee_management_id'];
+        $recordDate = $leave['record_date'];
+
+        // Check existing leave with Pending or Approved status
+        $existingLeave = Leave::where('employee_management_id', $employeeId)
+            ->where('biometric_imports_id', $biometricImportId)
+            ->where('record_date', $recordDate)
+            ->whereIn('status', ['pending', 'approved'])
+            ->first();
+
+        if ($existingLeave) {
+            // Skip and add to skipped list
+            $employee = EmployeeManagement::find($employeeId);
+            $skippedRecords[] = [
+                'employee_id' => $employeeId,
+                'employee_name' => $employee->employee_name ?? 'Unknown',
+                'record_date' => $recordDate,
+                'status' => $existingLeave->status
+            ];
+            continue; // skip creation
         }
 
-        return response()->json(['message' => 'Leave records saved successfully']);
+        // Create leave record (allowed if no existing Pending/Approved)
+        Leave::create([
+            'employee_management_id' => $employeeId,
+            'leave_type' => $leave['leave_type'],
+            'reason' => $leave['reason'] ?? null,
+            'record_date' => $recordDate,
+            'status' => $leave['status'] ?? 'pending',
+            'with_pay' => $leave['with_pay'] ?? 'No',
+            'biometric_imports_id' => $biometricImportId,
+        ]);
+
+        $createdRecords++;
     }
+
+    // Return JSON response
+    if (count($skippedRecords) > 0) {
+        return response()->json([
+            'message' => 'Some leave records were skipped because they already exist.',
+            'created_count' => $createdRecords,
+            'skipped' => $skippedRecords
+        ]);
+    }
+
+    return response()->json([
+        'message' => 'All leave records saved successfully.',
+        'created_count' => $createdRecords
+    ]);
+}
+
+    // public function store(Request $request)
+    // {
+    //     $biometricImportId = $this->biometricHistoryList->getLoadedRecordId();
+
+    //     $request->validate([
+    //         'leaveArray' => 'required|array',
+    //         'leaveArray.*.employee_management_id' => 'required|integer',
+    //         'leaveArray.*.record_date' => [
+    //             'required',
+    //             'date',
+    //             function ($attribute, $value, $fail) use ($request, $biometricImportId) {
+    //                 $index = explode('.', $attribute)[1];
+    //                 $employeeId = $request->leaveArray[$index]['employee_management_id'];
+
+    //                 $existingLeave = Leave::where('employee_management_id', $employeeId)
+    //                     ->where('biometric_imports_id', $biometricImportId)
+    //                     ->where('record_date', $value)
+    //                     ->first();
+
+    //                 if ($existingLeave) {
+    //                     // If status is Pending or Approved → skip
+    //                     if (in_array($existingLeave->status, ['pending', 'approved'])) {
+    //                         $fail("Leave for employee ID {$employeeId} on {$value} already exists with status '{$existingLeave->status}'.");
+    //                     }
+    //                     // Cancelled → allow storing
+    //                 }
+    //             }
+    //         ],
+    //     ]);
+
+    //     $createdRecords = 0;
+    //     $skippedRecords = [];
+
+    //     foreach ($request->leaveArray as $leave) {
+    //         $employeeId = $leave['employee_management_id'];
+    //         $recordDate = $leave['record_date'];
+
+    //         $existingLeave = Leave::where('employee_management_id', $employeeId)
+    //             ->where('record_date', $recordDate)
+    //             ->first();
+
+    //         if ($existingLeave && in_array($existingLeave->status, ['pending', 'approved'])) {
+    //             // Add to skipped array
+    //             $employee = EmployeeManagement::find($employeeId);
+    //             $skippedRecords[] = [
+    //                 'employee_id' => $employeeId,
+    //                 'employee_name' => $employee->employee_name ?? 'Unknown',
+    //                 'record_date' => $recordDate,
+    //                 'status' => $existingLeave->status
+    //             ];
+    //             continue; // Skip creation
+    //         }
+
+    //         // Create leave
+    //         Leave::create([
+    //             'employee_management_id' => $employeeId,
+    //             'leave_type' => $leave['leave_type'],
+    //             'reason' => $leave['reason'] ?? null,
+    //             'record_date' => $recordDate,
+    //             'status' => $leave['status'] ?? 'pending',
+    //             'with_pay' => $leave['with_pay'] ?? 'No',
+    //             'biometric_imports_id' => $biometricImportId,
+    //         ]);
+
+    //         $createdRecords++;
+    //     }
+
+    //     // Return response
+    //     if (count($skippedRecords) > 0) {
+    //         return response()->json([
+    //             'message' => 'Some leave records were skipped because they already exist.',
+    //             'created_count' => $createdRecords,
+    //             'skipped' => $skippedRecords
+    //         ]);
+    //     }
+
+    //     return response()->json([
+    //         'message' => 'All leave records saved successfully.',
+    //         'created_count' => $createdRecords
+    //     ]);
+    // }
+
+    // public function store(Request $request)
+    // {
+    //     $biometricImportId = $this->biometricHistoryList->getLoadedRecordId();
+
+    //     $request->validate([
+    //         'leaveArray' => 'required|array',
+    //         'leaveArray.*.employee_management_id' => 'required|integer',
+    //         'leaveArray.*.record_date' => [
+    //             'required',
+    //             'date',
+    //             function ($attribute, $value, $fail) use ($request) {
+    //                 $index = explode('.', $attribute)[1];
+    //                 $employeeId = $request->leaveArray[$index]['employee_management_id'];
+
+    //                 // Fetch existing leave for the same employee + date
+    //                 $existingLeave = Leave::where('employee_management_id', $employeeId)
+    //                     ->where('record_date', $value)
+    //                     ->first();
+
+    //                 if ($existingLeave) {
+
+    //                     // If status is Pending or Approved → block store
+    //                     if (in_array($existingLeave->status, ['Pending', 'Approved'])) {
+    //                         return $fail("Leave for employee ID {$employeeId} on {$value} already exists with status '{$existingLeave->status}'.");
+    //                     }
+
+    //                     // If Cancelled → allow storing
+    //                     // No fail → allowed
+    //                 }
+    //             }
+    //         ],
+    //     ]);
+
+    //     // Save records
+    //     foreach ($request->leaveArray as $leave) {
+    //         Leave::create([
+    //             'employee_management_id' => $leave['employee_management_id'],
+    //             'leave_type' => $leave['leave_type'],
+    //             'reason' => $leave['reason'] ?? null,
+    //             'record_date' => $leave['record_date'],
+    //             'status' => $leave['status'] ?? 'Pending',
+    //             'with_pay' => $leave['with_pay'] ?? 'No',
+    //             'biometric_imports_id' => $biometricImportId,
+    //         ]);
+    //     }
+
+    //     return response()->json(['message' => 'Leave records saved successfully']);
+    // }
+
+    // public function store(Request $request)
+    // {
+    //     $biometricImportId = $this->biometricHistoryList->getLoadedRecordId();
+    //     $request->validate([
+    //         'leaveArray' => 'required|array',
+    //         'leaveArray.*.employee_management_id' => 'required|integer',
+    //         'leaveArray.*.record_date' => [
+    //             'required',
+    //             'date',
+    //             function ($attribute, $value, $fail) use ($request) {
+    //                 $index = explode('.', $attribute)[1];
+    //                 $employeeId = $request->leaveArray[$index]['employee_management_id'];
+
+    //                 $exists = Leave::where('employee_management_id', $employeeId)
+    //                     ->where('record_date', $value)
+    //                     ->exists();
+
+    //                 if ($exists) {
+    //                     $fail("Leave for employee ID {$employeeId} on {$value} already exists.");
+    //                 }
+    //             }
+    //         ],
+    //     ]);
+
+    //     foreach ($request->leaveArray as $leave) {
+    //         Leave::create([
+    //             'employee_management_id' => $leave['employee_management_id'],
+    //             'leave_type' => $leave['leave_type'],
+    //             'reason' => $leave['reason'] ?? null,
+    //             'record_date' => $leave['record_date'],
+    //             'status' => $leave['status'] ?? 'pending',
+    //             'with_pay' => $leave['with_pay'] ?? 'No',
+    //             'biometric_imports_id' => $biometricImportId,
+    //         ]);
+    //     }
+
+    //     return response()->json(['message' => 'Leave records saved successfully']);
+    // }
 
     /**
      * Display the specified resource.

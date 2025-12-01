@@ -159,14 +159,15 @@
                                 <thead class="text-white sticky top-0" style="background-color: #00291B;">
                                     <tr>
                                         <th class="px-4 py-2 border text-white" style="width: 4%;">ID</th>
-                                        <th class="px-4 py-2 border text-white" style="width: 8%;">First Name</th>
                                         <th class="px-4 py-2 border text-white" style="width: 8%;">Last Name</th>
+                                        <th class="px-4 py-2 border text-white" style="width: 8%;">First Name</th>
                                         <th class="px-4 py-2 border text-white" style="width: 8%;">Department</th>
                                         <th class="px-4 py-2 border text-white" style="width: 6%;">Area</th>
                                         <th class="px-4 py-2 border text-white" style="width: 7%;">Date</th>
                                         <th class="px-4 py-2 border text-white" style="width: 6%;">Earliest Time</th>
                                         <th class="px-4 py-2 border text-white" style="width: 6%;">Latest Time</th>
                                         <th class="px-4 py-2 border text-white" style="width: 7%;">Schedule</th>
+                                        <th class="px-4 py-2 border text-white" style="width: 7%;">Schedule Shift</th>
                                         <th class="px-4 py-2 border text-white" style="width: 5%;">ORD-OT</th>
                                         <th class="px-4 py-2 border text-white" style="width: 5%;">Ord-ND</th>
                                         <th class="px-4 py-2 border text-white" style="width: 5%;">Ord-ND-OT</th>
@@ -320,7 +321,9 @@
                             serverSide: true,
                             autoWidth: false,
                             responsive: true,
-                            lengthChange: false,
+                            lengthChange: true, // only keep this
+                            lengthMenu: [10, 20, 50], // page length options
+                            pageLength: 50, // default rows per page
                             dom: '<"flex justify-between items-center mb-4"Bf>rt<"flex justify-between items-center mt-4"ip>',
 
                             ajax: {
@@ -394,15 +397,16 @@
                                     className: 'px-6 py-4 text-sm font-bold text-gray-900 border-r border-gray-100 text-center'
                                 },
                                 {
+                                    data: 'last_name',
+                                    name: 'last_name',
+                                    className: 'px-6 py-4 text-sm text-gray-900 border-r border-gray-100'
+                                },
+                                {
                                     data: 'first_name',
                                     name: 'first_name',
                                     className: 'px-6 py-4 text-sm text-gray-900 border-r border-gray-100'
                                 },
                                 {
-                                    data: 'last_name',
-                                    name: 'last_name',
-                                    className: 'px-6 py-4 text-sm text-gray-900 border-r border-gray-100'
-                                }, {
                                     data: 'department',
                                     name: 'department',
                                     className: 'px-6 py-4 text-sm text-gray-900 border-r border-gray-100 text-center',
@@ -460,6 +464,11 @@
                                 {
                                     data: 'schedule',
                                     name: 'schedule',
+                                    className: 'px-6 py-4 text-sm text-gray-800 border-r border-gray-100'
+                                },
+                                {
+                                    data: 'schedule_shift',
+                                    name: 'schedule_shift',
                                     className: 'px-6 py-4 text-sm text-gray-800 border-r border-gray-100'
                                 },
                                 {
@@ -532,44 +541,39 @@
 
                                         if (row.status === 'Pending') {
                                             buttonGroup = `
-                                                <div class="flex items-center justify-center space-x-2">
+                                                <div class="flex items-center justify-center space-x-3">
+                                                    <!-- Approve -->
                                                     <button onclick="approvedOvertimeFunction(${row.id})"
-                                                        class="px-3 py-2 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
-                                                        Approve
+                                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-check"></i>
                                                     </button>
+                                                    <!-- Edit -->
                                                     <button x-data @click.prevent="$dispatch('open-modal', 'edit-overtime')"
                                                         onclick="editOvertimeFunction(${row.id})"
-                                                        class="px-3 py-2 text-sm text-white bg-green-600 rounded-lg hover:bg-green-700 transition">
-                                                        Edit
+                                                        class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-edit"></i>
                                                     </button>
+
+                                                    <!-- Cancel -->
                                                     <button onclick="cancelOvertimeFunctio(${row.id})"
-                                                        class="px-3 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
-                                                        Cancel
-                                                    </button>
-                                                    <button onclick="deleteOvertimeFunction(${row.attendance_records_id})"
-                                                        class="px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition">
-                                                        Delete
+                                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-times"></i>
                                                     </button>
                                                 </div>`;
                                         } else if (row.status === 'Approved') {
                                             buttonGroup = `
-                                                <div class="flex items-center justify-center space-x-2">
-                                                    <button onclick="cancelOvertimeFunctio(${row.id})"
-                                                        class="px-3 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
-                                                        Cancel
-                                                    </button>
-                                                    <button onclick="deleteOvertimeFunction(${row.attendance_records_id})"
-                                                        class="px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition">
-                                                        Delete
-                                                    </button>
-                                                </div>`;
+                                            <div class="flex items-center justify-center space-x-2">
+                                                <button onclick="cancelOvertimeFunctio(${row.id})"
+                                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>`;
                                         } else if (row.status === 'Cancelled') {
                                             buttonGroup = `
                                                 <div class="flex items-center justify-center space-x-2">
-                                                    <span class="text-red-600 font-semibold">Cancelled</span>
-                                                    <button onclick="deleteOvertimeFunction(${row.attendance_records_id})"
-                                                        class="px-3 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition">
-                                                        Delete
+                                                    <button onclick="handleRedo(${row.id})"
+                                                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-undo"></i>
                                                     </button>
                                                 </div>`;
                                         }
@@ -589,7 +593,7 @@
                                     previous: "Previous"
                                 }
                             },
-                            pageLength: 10
+                            pageLength: 30
                         });
                     }, 150);
                 },
@@ -760,7 +764,12 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     $.ajax({
                         url: "{{ route('overtime.counts') }}",
                         type: "GET",

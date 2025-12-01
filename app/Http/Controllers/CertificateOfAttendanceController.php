@@ -59,8 +59,8 @@ class CertificateOfAttendanceController extends Controller
                 'record_date' => $coa->date,
                 'earliest_time' => $coa->earliest_time,
                 'latest_time' => $coa->latest_time,
-                'weekday' => $coa->weekday,
-                'attendance_area' => $coa->attendance_area ?? null,
+                'attendance_area' => 'COA',
+                'weekday' => $coa->weekday
             ]);
 
             // ✅ Update the COA with the generated AttendanceRecord ID
@@ -265,6 +265,8 @@ class CertificateOfAttendanceController extends Controller
                     foreach ($employees as $employee) {
                         $alreadyExists = CertificateOfAttendance::where('employee_management_id', $employee->id)
                             ->where('date', $attendance['date'])
+                            ->where('biometric_imports_id', $biometricImportId)
+                            ->whereIn('approval_status', ['Pending', 'Approved']) // Only consider these statuses
                             ->exists();
 
                         if ($alreadyExists) {
@@ -279,8 +281,8 @@ class CertificateOfAttendanceController extends Controller
                         // ✅ Create CertificateOfAttendance using new record ID
                             $certificateOfAttendance = CertificateOfAttendance::create([
                             'employee_management_id' => $employee->id,
-                            'earliest_time' => $attendance['earliest_time'],
-                            'latest_time' => $attendance['latest_time'],
+                            'earliest_time' => $attendance['earliest_time'] ?? '00:00',
+                            'latest_time' => $attendance['latest_time'] ?? '00:00',
                             'others' => $attendance['others'] ?? null,
                             'reason' => $attendance['reason'] ?? null,
                             'date' => $attendance['date'],
@@ -296,14 +298,16 @@ class CertificateOfAttendanceController extends Controller
 
                 // ✅ Case: Single Employee
                 else {
-                    $alreadyExists = CertificateOfAttendance::where('employee_management_id', $attendance['employee_management_id'])
+                    $employee = EmployeeManagement::find($attendance['employee_management_id']);
+                    $alreadyExists = CertificateOfAttendance::where('employee_management_id',  $attendance['employee_management_id'])
                         ->where('date', $attendance['date'])
+                        ->where('biometric_imports_id', $biometricImportId)
+                        ->whereIn('approval_status', ['Pending', 'Approved']) // Only consider these statuses
                         ->exists();
 
                     if ($alreadyExists) {
-                        $employee = EmployeeManagement::find($attendance['employee_management_id']);
                         $existingRecords[] = [
-                            'employee_id' => $attendance['employee_management_id'],
+                            'employee_id' =>  $attendance['employee_management_id'],
                             'employee_name' => $employee->employee_name ?? 'Unknown',
                             'date' => $attendance['date'],
                         ];
@@ -330,19 +334,14 @@ class CertificateOfAttendanceController extends Controller
 
             DB::commit();
 
-            // ✅ Clean response
-            if (count($existingRecords) > 0) {
-                return response()->json([
-                    'message' => "Attendance records added successfully, but some were skipped.",
-                    'created_count' => $createdRecords,
-                    'skipped' => $existingRecords
-                ]);
-            }
-
             return response()->json([
-                'message' => 'All attendance records added successfully.',
-                'created_count' => $createdRecords
-            ]);
+                'message' => count($existingRecords) > 0
+                    ? "Attendance records added successfully, but some were skipped."
+                    : "All attendance records added successfully.",
+                'created_count' => $createdRecords,
+                'skipped' => $existingRecords ?? []
+            ], 200);
+
 
         } catch (\Exception $e) {
             DB::rollBack();

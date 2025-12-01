@@ -217,7 +217,7 @@
                                         <th style="width: 22%">Reason</th>
                                         <th style="width: 5%">Date</th>
                                         <th style="width: 8%">Approval Status</th>
-                                        <th style="width: 6%">Action</th>
+                                        <th style="width: 6%; text-align: center;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -330,7 +330,7 @@
                     </div>
                 </div>
                 <!-- Attachment Upload -->
-                <div class="mt-6">
+                {{-- <div class="mt-6">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Attachment (Optional)</label>
 
                     <div id="dropZone"
@@ -346,7 +346,7 @@
                         </p>
                         <p class="text-xs text-gray-500">Supports JPG, PNG, PDF (Max 5MB)</p>
                     </div>
-                </div>
+                </div> --}}
 
 
                 <!-- Modal Footer -->
@@ -368,7 +368,10 @@
             <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
                 <!-- Header -->
                 <div class="flex justify-between items-center border-b pb-2 mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">Skipped Attendance Records</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 flex items-center space-x-2">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 fa-beat" style="font-size: 1.2rem;"></i>
+                        <span>Skipped Attendance Records</span>
+                    </h3>
                     <button onclick="closeSkippedModal()"
                         class="text-gray-500 hover:text-gray-800 text-xl">&times;</button>
                 </div>
@@ -430,7 +433,9 @@
                             serverSide: true,
                             autoWidth: false, // important for fixed widths
                             responsive: true,
-                            lengthChange: false,
+                            lengthChange: true, // only keep this
+                            lengthMenu: [10, 20, 50], // page length options
+                            pageLength: 50, // default rows per page
                             // searching: false, // ✅ hides the global search box
                             dom: '<"flex justify-between items-center mb-4"Bf>rt<"flex justify-between items-center mt-4"lip>',
                             ajax: {
@@ -619,14 +624,31 @@
                                         switch (row.approval_status) {
                                             case 'Pending':
                                                 return `
-                                    <div class="flex justify-center space-x-2">
-                                        <button onclick="approveCertificate(${row.id});" class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">Approve</button>
-                                        <button onclick="cancelCertificate(${row.id});" class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">Cancel</button>
-                                    </div>`;
+                                                <div class="flex justify-center space-x-2">
+                                                    <button onclick="approveCertificate(${row.id})"
+                                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button onclick="cancelCertificate(${row.id})"
+                                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>`;
                                             case 'Approved':
-                                                return `<button onclick="cancelCertificate(${row.id});" class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">Cancel</button>`;
+                                                return `<div class="flex items-center justify-center space-x-2">
+                                                        <button onclick="cancelCertificate(${row.id})"
+                                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>`;
                                             case 'Cancelled':
-                                                return `<span class="text-red-600 font-semibold">Cancelled</span>`;
+                                                return `
+                                                    <div class="flex items-center justify-center space-x-2">
+                                                        <button onclick="handleRedo(${row.id})"
+                                                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg transition">
+                                                            <i class="fas fa-undo"></i>
+                                                        </button>
+                                                    </div>`;
                                             default:
                                                 return '';
                                         }
@@ -682,6 +704,7 @@
                             _token: "{{ csrf_token() }}"
                         },
                         success: function(response) {
+                            console.log(response);
                             if (response.success) {
                                 Swal.fire({
                                     title: "Approved!",
@@ -753,7 +776,12 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     $.ajax({
                         url: "{{ route('employee.fetch.employeename') }}",
                         method: 'GET',
@@ -781,7 +809,12 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     $.ajax({
                         url: "{{ route('certificateOfAttendance.counts') }}",
                         type: "GET",
@@ -840,11 +873,12 @@
                                 <div class="time_type_container_${dateFormatted}">
                                 </div>
                                 <div class="flex space-x-4 mt-3">
-                                    <button onclick="timeType('${dateFormatted}');"
+                                    <button onclick="timeType('${dateFormatted}', 'in');"
                                         class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm">
                                         + In
                                     </button>
-                                    <button onclick="timeType('${dateFormatted}');"
+
+                                    <button onclick="timeType('${dateFormatted}', 'out');"
                                         class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm">
                                         + Out
                                     </button>
@@ -853,30 +887,39 @@
         }
         let timeTypeCount = 0;
 
-        function timeType(identification) {
+        function timeType(identification, type) {
             timeTypeCount++;
+
+            const isInChecked = type === 'in' ? 'checked' : '';
+            const isOutChecked = type === 'out' ? 'checked' : '';
+
             $('.time_type_container_' + identification).append(`
-            <div class="time_type_details mb-5" id="${identification}">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center space-x-4">
-                        <label class="flex items-center space-x-2">
-                            <input type="radio" name="timeType${timeTypeCount}" value="in"
-                                class="text-green-600" checked>
-                            <span>In</span>
-                        </label>
-                        <label class="flex items-center space-x-2">
-                            <input type="radio" name="timeType${timeTypeCount}" value="out"
-                                class="text-green-600">
-                            <span>Out</span>
-                        </label>
-                        <input type="time" id="timeInput${timeTypeCount}" name="timeInput${timeTypeCount}"
-                            class="timeInput${identification} mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
-                            focus:ring-blue-500 focus:border-blue-500 text-sm" />
+                <div class="time_type_details mb-5" id="${identification}">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="timeType${timeTypeCount}" value="in"
+                                    class="text-green-600" ${isInChecked}>
+                                <span>In</span>
+                            </label>
+
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="timeType${timeTypeCount}" value="out"
+                                    class="text-green-600" ${isOutChecked}>
+                                <span>Out</span>
+                            </label>
+
+                            <input type="time" id="timeInput${timeTypeCount}" name="timeInput${timeTypeCount}"
+                                class="timeInput${identification} mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+                                focus:ring-blue-500 focus:border-blue-500 text-sm" />
+                        </div>
+
+                        <button class="text-red-500 hover:text-red-700" onclick="removeTimeType('${identification}');">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <button class="text-red-500 hover:text-red-700" onclick="removeTimeType('${identification}');">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>`);
+                </div>
+            `);
         }
 
         let range = [];
@@ -976,6 +1019,8 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
+                        console.log(response);
+                        $('#certificate-attendance-table').DataTable().ajax.reload();
                         // $.each(response.skipped, function(index, item) {
                         //     console.log("Added:", item.employee_name);
                         // });
@@ -984,12 +1029,13 @@
                             showSkippedModal(response.skipped);
                         }
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
+                            icon: (response.skipped?.length || 0) > 0 ? 'warning' : 'success',
+                            title: (response.skipped?.length || 0) > 0 ? 'Warning' : 'Success',
                             text: response.message,
                             timer: 2000,
                             showConfirmButton: false
                         });
+
                     },
                     error: function(xhr) {
                         let errorMsg = "An error occurred";
@@ -1019,7 +1065,6 @@
                     }
                 });
             }
-            console.log(attendanceArray); // ✅ Final structured result
 
             $('#certificate-attendance-table').DataTable().ajax.reload();
             loadCertificateOfAttendanceCounts();

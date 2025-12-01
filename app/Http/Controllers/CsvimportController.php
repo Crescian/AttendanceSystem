@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Csvimport;
-use Illuminate\Http\Request;
-use League\Csv\Writer;
-use SplTempFileObject;
-use Illuminate\Support\Facades\Storage;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use Carbon\Carbon;
 use App\Models\BiometricHistoryList;
+use App\Services\AttendanceProcessor;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use League\Csv\Writer;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use SplTempFileObject;
 
 class CsvimportController extends Controller
 {
@@ -24,6 +26,62 @@ class CsvimportController extends Controller
     public function index()
     {
     }
+
+    // public function uploadCSV(Request $request, AttendanceProcessor $processor)
+    // {
+    //     // Allow unlimited execution time (careful on production)
+    //     set_time_limit(0);
+    //     ini_set('max_execution_time', 0);
+
+    //     $request->validate([
+    //         'file' => 'required|mimes:csv,txt,xlsx,xls|max:5120',
+    //     ]);
+
+    //     $uploaded = $request->file('file');
+    //     if (! $uploaded || ! $uploaded->isValid()) {
+    //         return response()->json(['error' => 'Invalid file upload'], 422);
+    //     }
+
+    //     $ext = strtolower($uploaded->getClientOriginalExtension());
+    //     $fileName = 'DailyAttendance.' . $ext;
+    //     $path = $uploaded->storeAs('public/python', $fileName);
+
+    //     $csvPath = storage_path("app/public/python/{$fileName}");
+    //     $outputDir = public_path('python'); // keep parity with your python script output dir
+
+    //     // Compute new biometric import id (same approach)
+    //     $latestId = \App\Models\BiometricHistoryList::latest('id')->value('id') ?? 0;
+    //     $biometricImportId = $latestId + 1;
+
+    //     // small wait loop for file availability
+    //     $attempts = 0;
+    //     while (! file_exists($csvPath) && $attempts < 10) {
+    //         usleep(50_000);
+    //         $attempts++;
+    //     }
+
+    //     if (! file_exists($csvPath)) {
+    //         return response()->json(['error' => 'Uploaded file not found on disk'], 500);
+    //     }
+
+    //     try {
+    //         $result = $processor->processFile($csvPath, $outputDir, $biometricImportId);
+
+    //         if (! empty($result['error'])) {
+    //             return response()->json(['error' => $result['error'], 'log' => $result['log'] ?? null], 500);
+    //         }
+
+    //         return response()->json([
+    //             'message' => 'File processed successfully',
+    //             'preview' => $result['preview'] ?? null,
+    //             'stats'   => $result['stats'] ?? null,
+    //         ], 200);
+
+    //     } catch (\Throwable $e) {
+    //         Log::error('Attendance processing error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+    //         return response()->json(['error' => 'Processing failed: '.$e->getMessage()], 500);
+    //     }
+    // }
 
     public function uploadCSV(Request $request)
     {

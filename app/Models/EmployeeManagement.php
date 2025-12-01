@@ -16,5 +16,6 @@ class EmployeeManagement extends Model
         'department',
         'report_to',
         'schedule',
+        'status'
     ];
 }

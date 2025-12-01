@@ -210,15 +210,15 @@
                                         <th style="width: 10%">Report To</th>
                                         <th style="width: 10%">Schedule Shift</th>
                                         <th style="width: 10%">Attendance Area</th>
-                                        <th style="width: 10%">Point Name</th>
-                                        <th style="width: 10%">Verification Mode</th>
+                                        {{-- <th style="width: 10%">Point Name</th>
+                                        <th style="width: 10%">Verification Mode</th> --}}
                                         {{-- <th style="width: 10%">Attendance Photo</th> --}}
                                         <th style="width: 10%">Record Date</th>
                                         <th style="width: 8%">Earliest Time</th>
                                         <th style="width: 8%">Latest Time</th>
                                         <th style="width: 8%">Weekday</th>
                                         <th style="width: 8%">Leaves</th>
-                                        <th style="width: 6%">Action</th>
+                                        {{-- <th style="width: 6%">Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -377,16 +377,21 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
-
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     setTimeout(() => {
                         let table = $('#attendance-record-table').DataTable({
                             processing: true,
                             serverSide: true,
                             autoWidth: false,
                             responsive: true,
-                            lengthChange: false,
-                            pageLength: 10,
+                            lengthChange: true, // only keep this
+                            lengthMenu: [10, 20, 50], // page length options
+                            pageLength: 50, // default rows per page
                             dom: '<"flex justify-between items-center mb-4"Bf>rt<"flex justify-between items-center mt-4"lip>',
                             ajax: {
                                 url: "{{ route('attendance-record.fetch') }}",
@@ -480,20 +485,25 @@
                                     }
                                 },
 
-                                {
-                                    data: 'attendance_point_name',
-                                    name: 'attendance_records.attendance_point_name',
-                                    width: "10%"
-                                },
-                                {
-                                    data: 'verification_mode',
-                                    name: 'attendance_records.verification_mode',
-                                    width: "8%"
-                                },
+                                // {
+                                //     data: 'attendance_point_name',
+                                //     name: 'attendance_records.attendance_point_name',
+                                //     width: "10%"
+                                // },
+                                // {
+                                //     data: 'verification_mode',
+                                //     name: 'attendance_records.verification_mode',
+                                //     width: "8%"
+                                // },
                                 {
                                     data: 'record_date',
                                     name: 'attendance_records.record_date',
-                                    width: "8%"
+                                    width: "8%",
+                                    render: function(data) {
+                                        if (!data) return '';
+                                        // Keep only the date part before the space
+                                        return data.split(' ')[0];
+                                    }
                                 },
                                 {
                                     data: 'earliest_time',
@@ -515,21 +525,21 @@
                                     name: 'attendance_records.leaves',
                                     width: "8%"
                                 },
-                                {
-                                    data: null,
-                                    orderable: false,
-                                    searchable: false,
-                                    width: "6%",
-                                    render: function(data, type, row) {
-                                        return `
-                                    <div class="flex justify-center space-x-2">
-                                        <button onclick="viewRecord(${row.id});"
-                                            class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-                                            View
-                                        </button>
-                                    </div>`;
-                                    }
-                                }
+                                // {
+                                //     data: null,
+                                //     orderable: false,
+                                //     searchable: false,
+                                //     width: "6%",
+                                //     render: function(data, type, row) {
+                                //         return `
+                                //     <div class="flex justify-center space-x-2">
+                                //         <button onclick="viewRecord(${row.id});"
+                                //             class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
+                                //             View
+                                //         </button>
+                                //     </div>`;
+                                //     }
+                                // }
                             ],
                             initComplete: function() {
                                 this.api().columns().every(function() {
@@ -651,7 +661,13 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     $.ajax({
                         url: "{{ route('employee.fetch.employeename') }}",
                         method: 'GET',
@@ -679,7 +695,12 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    let departmentName = data.data.department_name;
+                    let departmentName;
+                    if (!data.success) {
+                        departmentName = 'N/A';
+                    } else {
+                        departmentName = data.data.department_name;
+                    }
                     $.ajax({
                         url: "{{ route('certificateOfAttendance.counts') }}",
                         type: "GET",

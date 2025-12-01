@@ -28,14 +28,14 @@
                     <i class="fa-solid fa-file-circle-check mr-2"></i> {{ __('Certificates of Attendance') }}
                 </x-nav-link>
 
+                <x-nav-link :href="route('leave')" :active="request()->routeIs('leave')"
+                    class="text-white hover:text-white hover:bg-[#004d33] rounded-md px-3 text-sm font-medium transition duration-300 ease-in-out">
+                    <i class="fas fa-plane-departure mr-2"></i> {{ __('Leaves') }}
+                </x-nav-link>
+
                 <x-nav-link :href="route('schedule.adjustment')" :active="request()->routeIs('schedule.adjustment')"
                     class="text-white hover:text-white hover:bg-[#004d33] rounded-md px-3 text-sm font-medium transition duration-300 ease-in-out">
                     <i class="fa-solid fa-calendar-days mr-2"></i> {{ __('Schedule Adjustment') }}
-                </x-nav-link>
-
-                <x-nav-link :href="route('employee.management')" :active="request()->routeIs('employee.management')"
-                    class="text-white hover:text-white hover:bg-[#004d33] rounded-md px-3 text-sm font-medium transition duration-300 ease-in-out">
-                    <i class="fa-solid fa-users mr-2"></i> {{ __('Employee Management') }}
                 </x-nav-link>
             </div>
 
@@ -114,16 +114,16 @@
                                 {{ __('Attendance Record') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('employee.management')"
+                                class="text-black hover:text-green-700 flex items-center gap-2">
+                                <i class="fa-solid fa-users text-gray-600 w-4"></i>
+                                {{ __('Employee Management') }}
+                            </x-dropdown-link>
+
                             {{-- ADMIN TOOLS --}}
                             @if ($userRole === 'admin')
                                 <div class="border-t border-gray-200 my-1"></div>
                                 <span class="block px-4 py-2 text-xs text-gray-500 uppercase">Admin Management</span>
-
-                                <x-dropdown-link :href="route('attendance.log')"
-                                    class="text-black hover:text-green-700 flex items-center gap-2">
-                                    <i class="fas fa-clipboard-list text-gray-600 w-4"></i>
-                                    {{ __('User Log') }}
-                                </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('csv.import')"
                                     class="text-black hover:text-green-700 flex items-center gap-2">
@@ -137,16 +137,16 @@
                                     {{ __('Employee Data Import') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('leave')"
-                                    class="text-black hover:text-green-700 flex items-center gap-2">
-                                    <i class="fas fa-plane-departure text-gray-600 w-4"></i>
-                                    {{ __('Leaves Management') }}
-                                </x-dropdown-link>
-
                                 <x-dropdown-link :href="route('organization.structure')"
                                     class="text-black hover:text-green-700 flex items-center gap-2">
                                     <i class="fas fa-sitemap text-gray-600 w-4"></i>
                                     {{ __('Organization Structure') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('attendance.log')"
+                                    class="text-black hover:text-green-700 flex items-center gap-2">
+                                    <i class="fas fa-clipboard-list text-gray-600 w-4"></i>
+                                    {{ __('User Log') }}
                                 </x-dropdown-link>
                             @endif
 

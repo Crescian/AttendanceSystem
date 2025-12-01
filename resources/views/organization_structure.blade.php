@@ -132,7 +132,7 @@
                     <div class="flex justify-end space-x-2">
                         <button type="button" onclick="closeModal('#businessUnitModal')"
                             class="px-4 py-2 bg-gray-200 rounded-lg">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                        <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
                             onclick="save('businessUnit');">Save</button>
                     </div>
                 </form>
@@ -460,10 +460,10 @@
         }
 
         // Example form submit (you can later connect via AJAX or form POST)
-        $('#businessUnitForm, #departmentForm, #companyForm').on('submit', function(e) {
-            e.preventDefault();
-            closeModal('#' + $(this).attr('id').replace('Form', 'Modal'));
-        });
+        // $('#businessUnitForm, #departmentForm, #companyForm').on('submit', function(e) {
+        //     e.preventDefault();
+        //     closeModal('#' + $(this).attr('id').replace('Form', 'Modal'));
+        // });
     </script>
 
 </x-app-layout>

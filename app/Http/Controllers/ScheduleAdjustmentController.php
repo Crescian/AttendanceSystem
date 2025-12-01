@@ -8,6 +8,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 use App\Models\BiometricHistoryList;
 use App\Models\AttendanceRecord;
+use App\Models\EmployeeManagement;
 
 class ScheduleAdjustmentController extends Controller
 {
@@ -38,6 +39,65 @@ class ScheduleAdjustmentController extends Controller
             'data' => $data
         ]);
     }
+
+    // public function approve($id)
+    // {
+    //     try {
+    //         $biometricImportId = $this->biometricHistoryList->getLoadedRecordId();
+    //         $ScheduleAdjustment = ScheduleAdjustment::findOrFail($id);
+
+    //         $userId = $ScheduleAdjustment->users_id;  // <-- adjust name if needed
+    //         $date = $ScheduleAdjustment->record_date; // <-- include date filter
+
+    //         // 🔎 Check if the user already has a ScheduleAdjustment for this date
+    //         $existing = ScheduleAdjustment::where('users_id', $userId)
+    //             ->where('record_date', $date)
+    //             ->first();
+
+    //         if ($existing) {
+    //             // Existing record found for same user & date
+    //             if (in_array($existing->approval_status, ['Pending', 'Approved'])) {
+    //                 return response()->json([
+    //                     'success' => false,
+    //                     'message' => "A Schedule Adjustment already exists for this user on {$date} with status: {$existing->approval_status}",
+    //                 ], 400);
+    //             }
+
+    //             // If Cancelled → allow overwrite
+    //         }
+
+    //         // 🟢 Approve
+    //         $ScheduleAdjustment->approval_status = 'Approved';
+    //         $ScheduleAdjustment->save();
+
+    //         // Python Script Execution
+    //         $scriptPath = escapeshellarg(storage_path('app/public/python/edit_ot.py'));
+    //         $biometricId = escapeshellarg($biometricImportId);
+    //         $attendanceRecordsId = escapeshellarg($ScheduleAdjustment->attendance_records_id);
+
+    //         $command = "python {$scriptPath} {$biometricId} {$attendanceRecordsId} schedule_adjustment";
+
+    //         exec($command . ' 2>&1', $output, $returnVar);
+
+    //         if ($returnVar !== 0) {
+    //             throw new \Exception("Python script failed: " . implode("\n", $output));
+    //         }
+
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'Schedule Adjustment has been approved successfully.',
+    //             'data' => $attendanceRecordsId
+    //         ]);
+
+    //     } catch (\Exception $e) {
+
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Failed to approve ScheduleAdjustment.',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
 
     public function approve($id)
     {
@@ -73,6 +133,7 @@ class ScheduleAdjustmentController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to approve ScheduleAdjustment.',
+                // 'error' =>   $attendanceRecordsId
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -202,48 +263,123 @@ class ScheduleAdjustmentController extends Controller
         $request->validate([
             'attendanceArray' => 'required|array',
             'attendanceArray.*.employee_management_id' => 'required|integer',
-            'attendanceArray.*.record_date' => [
-                'required',
-                'date',
-                function ($attribute, $value, $fail) use ($request) {
-                    $index = explode('.', $attribute)[1]; // get index
-                    $employeeId = $request->attendanceArray[$index]['employee_management_id'];
-
-                    $exists = ScheduleAdjustment::where('employee_management_id', $employeeId)
-                        ->where('record_date', $value)
-                        ->exists();
-
-                    if ($exists) {
-                        $fail("Attendance for employee ID {$employeeId} on {$value} already exists.");
-                    }
-                }
-            ],
+            'attendanceArray.*.record_date' => 'required|date',
+            'attendanceArray.*.schedule' => 'required|string',
+            'attendanceArray.*.others' => 'nullable|string',
+            'attendanceArray.*.reason' => 'nullable|string',
+            'attendanceArray.*.approval_status' => 'nullable|string'
         ]);
 
+        $createdRecords = 0;
+        $skippedRecords = [];
+
         foreach ($request->attendanceArray as $attendance) {
-            // 🔹 Find AttendanceRecord by record_date + employee_management_id
-            $attendanceRecord = AttendanceRecord::where('employee_management_id', $attendance['employee_management_id'])
-                ->where('record_date', $attendance['record_date'])
+
+            $employeeId = $attendance['employee_management_id'];
+            $recordDate = $attendance['record_date'];
+
+            // Check if record exists with Pending or Approved
+            $exists = ScheduleAdjustment::where('employee_management_id', $employeeId)
+                ->where('record_date', $recordDate)
+                ->where('biometric_imports_id', $biometricImportId)
+                ->whereIn('approval_status', ['Pending', 'Approved'])
+                ->exists();
+
+            if ($exists) {
+                // Add to skipped array
+                $employee = EmployeeManagement::find($employeeId);
+                $skippedRecords[] = [
+                    'employee_id' => $employeeId,
+                    'employee_name' => $employee->employee_name ?? 'Unknown',
+                    'record_date' => $recordDate,
+                ];
+                continue; // Skip creation
+            }
+
+            // Find AttendanceRecord if exists
+            $attendanceRecord = AttendanceRecord::where('employee_management_id', $employeeId)
+                ->where('record_date', $recordDate)
                 ->first();
 
             $attendanceRecordId = $attendanceRecord ? $attendanceRecord->id : null;
 
-            // 🔹 Create ScheduleAdjustment and link the AttendanceRecord ID
+            // Create ScheduleAdjustment
             ScheduleAdjustment::create([
-                'employee_management_id' => $attendance['employee_management_id'],
+                'employee_management_id' => $employeeId,
                 'schedule' => $attendance['schedule'],
                 'others' => $attendance['others'] ?? null,
                 'reason' => $attendance['reason'] ?? null,
-                'record_date' => $attendance['record_date'],
-                'weekday' => \Carbon\Carbon::parse($attendance['record_date'])->format('l'),
+                'record_date' => $recordDate,
+                'weekday' => \Carbon\Carbon::parse($recordDate)->format('l'),
                 'approval_status' => $attendance['approval_status'] ?? 'Pending',
                 'biometric_imports_id' => $biometricImportId,
-                'attendance_records_id' => $attendanceRecordId, // ✅ Save the found ID
+                'attendance_records_id' => $attendanceRecordId,
             ]);
+
+            $createdRecords++;
         }
 
-        return response()->json(['message' => 'Attendance records saved successfully']);
+        return response()->json([
+            'message' => count($skippedRecords) > 0
+                ? 'Attendance records added, but some were skipped.'
+                : 'All attendance records added successfully.',
+            'created_count' => $createdRecords,
+            'skipped' => $skippedRecords ?? [] // always include, even if empty
+        ], 200); // explicit HTTP status code
+
     }
+
+    // public function store(Request $request)
+    // {
+    //     $biometricImportId = $this->biometricHistoryList->getLoadedRecordId();
+
+    //     $request->validate([
+    //         'attendanceArray' => 'required|array',
+    //         'attendanceArray.*.employee_management_id' => 'required|integer',
+    //         'attendanceArray.*.record_date' => [
+    //             'required',
+    //             'date',
+    //             function ($attribute, $value, $fail) use ($request, $biometricImportId) {
+    //                 $index = explode('.', $attribute)[1]; // get index
+    //                 $employeeId = $request->attendanceArray[$index]['employee_management_id'];
+
+    //                 $exists = ScheduleAdjustment::where('employee_management_id', $employeeId)
+    //                     ->where('record_date', $value)
+    //                     ->where('biometric_imports_id', $biometricImportId)
+    //                     ->whereIn('approval_status', ['Pending', 'Approved']) // Only consider these statuses
+    //                     ->exists();
+
+    //                 if ($exists) {
+    //                     $fail("Attendance for employee ID {$employeeId} on {$value} already exists.");
+    //                 }
+    //             }
+    //         ],
+    //     ]);
+
+    //     foreach ($request->attendanceArray as $attendance) {
+    //         // 🔹 Find AttendanceRecord by record_date + employee_management_id
+    //         $attendanceRecord = AttendanceRecord::where('employee_management_id', $attendance['employee_management_id'])
+    //             ->where('record_date', $attendance['record_date'])
+    //             ->first();
+
+    //         $attendanceRecordId = $attendanceRecord ? $attendanceRecord->id : null;
+
+    //         // 🔹 Create ScheduleAdjustment and link the AttendanceRecord ID
+    //         ScheduleAdjustment::create([
+    //             'employee_management_id' => $attendance['employee_management_id'],
+    //             'schedule' => $attendance['schedule'],
+    //             'others' => $attendance['others'] ?? null,
+    //             'reason' => $attendance['reason'] ?? null,
+    //             'record_date' => $attendance['record_date'],
+    //             'weekday' => \Carbon\Carbon::parse($attendance['record_date'])->format('l'),
+    //             'approval_status' => $attendance['approval_status'] ?? 'Pending',
+    //             'biometric_imports_id' => $biometricImportId,
+    //             'attendance_records_id' => $attendanceRecordId, // ✅ Save the found ID
+    //         ]);
+    //     }
+
+    //     return response()->json(['message' => 'Attendance records saved successfully']);
+    // }
 
     // public function store(Request $request)
     // {

@@ -1,21 +1,4 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Employee Management') }}
-            </h2>
-            <div class="mt-4 sm:mt-0">
-                <button x-data @click.prevent="$dispatch('open-modal', 'add-employee')"
-                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg shadow-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-all duration-200 hover:scale-105">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                    Add Employee
-                </button>
-            </div>
-        </div>
-    </x-slot> --}}
 
     <!-- Table Section inside Card -->
     <div class="p-6 mt-5">
@@ -53,7 +36,8 @@
                                 <th class="px-4 py-2 text-white">Supervisor</th>
                                 <th class="px-4 py-2 text-white">Schedule</th>
                                 <th class="px-4 py-2 text-white">Basic Salary</th>
-                                <th class="px-4 py-2 text-white">Action</th>
+                                <th class="px-4 py-2 text-white">Status</th>
+                                <th class="px-4 py-2 text-white text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody id="overtime-body" class="text-sm text-gray-800 divide-y divide-gray-200">
@@ -64,124 +48,6 @@
             </div>
         </div>
     </div>
-
-    {{--
-    <div class="py-8 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
-        <div class="p-8">
-            <!-- Main Content Card -->
-            <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200 p-4">
-                <!-- Table Header -->
-                <div class="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-semibold text-gray-800">Employee Records</h3>
-                        <div class="flex items-center space-x-2 text-sm text-gray-600">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                </path>
-                            </svg>
-                            <span>Total Records</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Table Container -->
-                <div class="overflow-x-auto">
-                    <table id="employeeTable" class="w-full">
-                        <thead class="bg-gray-800 text-white text-sm sticky top-0" style="color: white">
-                            <tr class="border-b border-gray-200">
-                                <th
-                                    class="px-6 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                                    <div class="flex items-center justify-center space-x-1 text-white">
-                                        <span>Unique ID</span>
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </div>
-                                </th>
-
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
-                                    <div class="flex items-center space-x-1 text-white">
-                                        <span>Employee Name</span>
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </div>
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
-                                    <div class="flex items-center space-x-1 text-white">
-                                        <span>Department</span>
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </div>
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
-                                    <div class="flex items-center space-x-1 text-white">
-                                        <span>Supervisor</span>
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </div>
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                                    <div class="flex items-center justify-center space-x-1 text-white">
-                                        <span>Schedule</span>
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </div>
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                                    <div class="flex items-center justify-center space-x-1 text-white">
-                                        <span>Basic Salary</span>
-                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                                        </svg>
-                                    </div>
-                                </th>
-                                <th
-                                    class="px-6 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">
-                                    <div class="flex items-center justify-center space-x-1 text-white p-4">
-                                        Actions
-
-                                    </div>
-                                </th>
-
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-100">
-                            <!-- Table body will be populated by DataTables -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Table Footer -->
-                <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                    <div class="flex items-center justify-between text-sm text-gray-600">
-                        <span>Showing filtered results</span>
-                        <span class="text-blue-600 font-medium">DataTables powered</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <!-- Edit Employee Modal -->
     <x-modal name="edit-employee" focusable>
@@ -200,18 +66,6 @@
                     <select id="schedule" name="schedule"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
                         <option value="" disabled selected class="text-gray-400">Select schedule</option>
-                        {{-- <option value="7-16">7:00 AM - 4:00 PM (Ordinary)</option>
-                        <option value="8-17">8:00 AM - 5:00 PM (Ordinary)</option>
-                        <option value="9-18">9:00 AM - 6:00 PM (Ordinary)</option>
-                        <option value="10-19">10:00 AM - 7:00 PM (Ordinary)</option>
-                        <option value="18-6">6:00 PM - 6:00 AM (Night Shift)</option>
-                        <option value="19-7">7:00 PM - 7:00 AM (Night Shift)</option>
-                        <option value="19-4">7:00 PM - 4:00 AM (Night Shift)</option>
-                        <option value="20-5">8:00 PM - 5:00 AM (Night Shift)</option>
-                        <option value="15-23">3:00 PM - 11:00 PM (No Break Time Night Shift)</option>
-                        <option value="15-0">3:00 PM - 12:00 AM (Night Shift)</option>
-                        <option value="23-7">11:00 PM - 7:00 AM (No Break Time Night Shift)</option>
-                        <option value="23-8">11:00 PM - 8:00 AM (Night Shift)</option> --}}
                     </select>
                 </div>
 
@@ -246,30 +100,6 @@
                         <select id="department" name="department"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
                             <option value="" disabled selected class="text-gray-400">Select department</option>
-                            <option value="SECURITY">SECURITY</option>
-                            <option value="GRADE CONTROL MOY AREA">GRADE CONTROL MOY AREA</option>
-                            <option value="OFFICE OF THE RESIDENT MANAGER">OFFICE OF THE RESIDENT MANAGER</option>
-                            <option value="LLRI-FLEET OPERATIONS">LLRI-FLEET OPERATIONS</option>
-                            <option value="LLRI-FLEET MAINTENANCE">LLRI-FLEET MAINTENANCE</option>
-                            <option value="OSH">OSH</option>
-                            <option value="LLRI-FUEL MANAGEMENT">LLRI-FUEL MANAGEMENT</option>
-                            <option value="MINE PRODUCTION">MINE PRODUCTION</option>
-                            <option value="EXPLORATION AND DRILLING">EXPLORATION AND DRILLING</option>
-                            <option value="GRADE CONTROL EXTRACTION">GRADE CONTROL EXTRACTION</option>
-                            <option value="MINE PLANNING AND DEVELOPMENT">MINE PLANNING AND DEVELOPMENT</option>
-                            <option value="LLRI-DRILLING SERVICES">LLRI-DRILLING SERVICES</option>
-                            <option value="LLRI-CIVIL WORKS">LLRI-CIVIL WORKS</option>
-                            <option value="MEPEO">MEPEO</option>
-                            <option value="LAMI-SHIPMENT OPERATIONS">LAMI-SHIPMENT OPERATIONS</option>
-                            <option value="LLRI-OSH">LLRI-OSH</option>
-                            <option value="PORT OPERATIONS">PORT OPERATIONS</option>
-                            <option value="LABORATORY">LABORATORY</option>
-                            <option value="HR SERVICES">HR SERVICES</option>
-                            <option value="LLRI-ADMIN SERVICES">LLRI-ADMIN SERVICES</option>
-                            <option value="LLRI-WAREHOUSE">LLRI-WAREHOUSE</option>
-                            <option value="LLRI-SHIPMENT">LLRI-SHIPMENT</option>
-                            <option value="COMMUNITY RELATION">COMMUNITY RELATION</option>
-                            <option value="ICT">ICT</option>
                         </select>
                     </div>
                     <div>
@@ -284,6 +114,18 @@
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Basic Salary</label>
                     <input id="basicSalary" type="text"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
+                </div>
+                <!-- Status -->
+                <div>
+                    <label for="employeeEditStatus" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Status
+                    </label>
+                    <select id="employeeEditStatus" name="status"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
+                        <option value="" disabled selected class="text-gray-400">Select status</option>
+                        <option value="Active">Active</option>
+                        <option value="Not Active">Not Active</option>
+                    </select>
                 </div>
             </div>
 
@@ -318,19 +160,6 @@
                     </label>
                     <select id="employeeAddSchedule" name="employeeAddSchedule"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
-                        {{-- <option value="" disabled selected class="text-gray-400">Select Schedule</option>
-                        <option value="7-16">7:00 AM - 4:00 PM (Ordinary)</option>
-                        <option value="8-17">8:00 AM - 5:00 PM (Ordinary)</option>
-                        <option value="9-18">9:00 AM - 6:00 PM (Ordinary)</option>
-                        <option value="10-19">10:00 AM - 7:00 PM (Ordinary)</option>
-                        <option value="18-6">6:00 PM - 6:00 AM (Night Shift)</option>
-                        <option value="19-7">7:00 PM - 7:00 AM (Night Shift)</option>
-                        <option value="19-4">7:00 PM - 4:00 AM (Night Shift)</option>
-                        <option value="20-5">8:00 PM - 5:00 AM (Night Shift)</option>
-                        <option value="15-23">3:00 PM - 11:00 PM (No Break Time Night Shift)</option>
-                        <option value="15-0">3:00 PM - 12:00 AM (Night Shift)</option>
-                        <option value="23-7">11:00 PM - 7:00 AM (No Break Time Night Shift)</option>
-                        <option value="23-8">11:00 PM - 8:00 AM (Night Shift)</option> --}}
                     </select>
                 </div>
 
@@ -369,30 +198,6 @@
                         <select id="employeeAddDepartment" name="employeeAddDepartment"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
                             <option value="" disabled selected class="text-gray-400">Select department</option>
-                            <option value="SECURITY">SECURITY</option>
-                            <option value="GRADE CONTROL MOY AREA">GRADE CONTROL MOY AREA</option>
-                            <option value="OFFICE OF THE RESIDENT MANAGER">OFFICE OF THE RESIDENT MANAGER</option>
-                            <option value="LLRI-FLEET OPERATIONS">LLRI-FLEET OPERATIONS</option>
-                            <option value="LLRI-FLEET MAINTENANCE">LLRI-FLEET MAINTENANCE</option>
-                            <option value="OSH">OSH</option>
-                            <option value="LLRI-FUEL MANAGEMENT">LLRI-FUEL MANAGEMENT</option>
-                            <option value="MINE PRODUCTION">MINE PRODUCTION</option>
-                            <option value="EXPLORATION AND DRILLING">EXPLORATION AND DRILLING</option>
-                            <option value="GRADE CONTROL EXTRACTION">GRADE CONTROL EXTRACTION</option>
-                            <option value="MINE PLANNING AND DEVELOPMENT">MINE PLANNING AND DEVELOPMENT</option>
-                            <option value="LLRI-DRILLING SERVICES">LLRI-DRILLING SERVICES</option>
-                            <option value="LLRI-CIVIL WORKS">LLRI-CIVIL WORKS</option>
-                            <option value="MEPEO">MEPEO</option>
-                            <option value="LAMI-SHIPMENT OPERATIONS">LAMI-SHIPMENT OPERATIONS</option>
-                            <option value="LLRI-OSH">LLRI-OSH</option>
-                            <option value="PORT OPERATIONS">PORT OPERATIONS</option>
-                            <option value="LABORATORY">LABORATORY</option>
-                            <option value="HR SERVICES">HR SERVICES</option>
-                            <option value="LLRI-ADMIN SERVICES">LLRI-ADMIN SERVICES</option>
-                            <option value="LLRI-WAREHOUSE">LLRI-WAREHOUSE</option>
-                            <option value="LLRI-SHIPMENT">LLRI-SHIPMENT</option>
-                            <option value="COMMUNITY RELATION">COMMUNITY RELATION</option>
-                            <option value="ICT">ICT</option>
                         </select>
                     </div>
                     <div>
@@ -410,6 +215,20 @@
                     <input type="text" id="basicAddSalary" name="basic_salary"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
                 </div>
+
+                <!-- Status -->
+                <div>
+                    <label for="employeeAddStatus" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Status
+                    </label>
+                    <select id="employeeAddStatus" name="status"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200">
+                        <option value="" disabled selected class="text-gray-400">Select status</option>
+                        <option value="Active">Active</option>
+                        <option value="Not Active">Not Active</option>
+                    </select>
+                </div>
+
             </div>
 
             <!-- Modal Actions -->
@@ -429,8 +248,31 @@
         const userId = "{{ Auth::user()->id ?? '' }}";
         const userRole = "{{ Auth::user()->role ?? '' }}";
         loadEmployeeTable();
-        loadSchedule()
+        loadSchedule();
+        loadDepartment();
         let globalID;
+
+        function loadDepartment() {
+            $('#employeeAddDepartment').html(''); // Clear existing options
+            $('#employeeAddDepartment').append('<option value="">Select Department...</option>');
+            $('#department').html(''); // Clear existing options
+            $('#department').append('<option value="">Select Department...</option>');
+            $.ajax({
+                url: "{{ route('department.fetch') }}",
+                type: 'GET',
+                success: function(response) {
+                    response.data.forEach(function(dept) {
+                        console.log(dept.id);
+                        $('#employeeAddDepartment').append(
+                            `<option value="${dept.department_name}">${dept.department_name}</option>`
+                        );
+                        $('#department').append(
+                            `<option value="${dept.department_name}">${dept.department_name}</option>`
+                        );
+                    });
+                },
+            });
+        }
 
         function loadSchedule() {
             // Load Schedule
@@ -492,7 +334,9 @@
                             serverSide: true,
                             autoWidth: false,
                             responsive: true,
-                            lengthChange: false,
+                            lengthChange: true, // only keep this
+                            lengthMenu: [10, 20, 50], // page length options
+                            pageLength: 50, // default rows per page
                             dom: '<"flex justify-between items-center mb-4"Bf>rt<"flex justify-between items-center mt-4"lip>',
                             ajax: {
                                 url: "{{ route('employees.fetch') }}",
@@ -588,7 +432,19 @@
                                     data: 'basic_salary',
                                     name: 'basic_salary',
                                     className: 'px-6 py-4 text-sm text-gray-700 border-r border-gray-100'
+                                }, {
+                                    data: 'status',
+                                    name: 'status',
+                                    className: 'px-6 py-4 text-sm text-gray-700 border-r border-gray-100',
+                                    render: function(data) {
+                                        if (data === 'Active') {
+                                            return '<span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">ACTIVE</span>';
+                                        } else {
+                                            return '<span class="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700">NOT ACTIVE</span>';
+                                        }
+                                    }
                                 },
+
                                 {
                                     data: null,
                                     orderable: false,
@@ -635,7 +491,6 @@
                                     previous: "Previous"
                                 }
                             },
-                            pageLength: 10,
                             initComplete: function() {
                                 this.api().columns().every(function() {
                                     var column = this;
@@ -681,6 +536,7 @@
                         firstName = fullName;
                     }
 
+                    console.log(data);
                     // Populate modal fields with employee data
                     $('#employeeUniqueId').val(data.unique_id);
                     $('#employeeFirstName').val(firstName);
@@ -689,6 +545,7 @@
                     $('#department').val(data.department);
                     $('#report_to').val(data.report_to);
                     $('#schedule').val(data.schedule);
+                    $('#employeeEditStatus').val(data.status ?? 'Not Active');
                     // Open the modal
                     window.dispatchEvent(new Event('open-modal'));
                 },
@@ -707,6 +564,7 @@
             let department = $('#department').val();
             let report_to = $('#report_to').val();
             let schedule = $('#schedule').val();
+            let employeeEditStatus = $('#employeeEditStatus').val();
             $.ajax({
                 url: `{{ route('employees.edit', ['id' => ':id']) }}`.replace(':id', globalID),
                 type: 'PUT',
@@ -718,6 +576,7 @@
                     department: department,
                     report_to: report_to,
                     schedule: schedule,
+                    status: employeeEditStatus,
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
@@ -782,6 +641,8 @@
             let employeeAddSchedule = $('#employeeAddSchedule').val();
             let employeeAddImmediateSupervisor = $('#employeeAddImmediateSupervisor').val();
             let basicAddSalary = $('#basicAddSalary').val();
+            let employeeAddStatus = $('#employeeAddStatus').val();
+
 
             $.ajax({
                 url: "{{ route('employees.store') }}",
@@ -794,6 +655,7 @@
                     employeeAddSchedule: employeeAddSchedule,
                     employeeAddImmediateSupervisor: employeeAddImmediateSupervisor,
                     basicAddSalary: basicAddSalary,
+                    employeeAddStatus: employeeAddStatus,
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {

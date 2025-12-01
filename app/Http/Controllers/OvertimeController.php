@@ -55,35 +55,36 @@ class OvertimeController extends Controller
             'data' => $data
         ]);
     }
-public function index(Request $request)
-{
-    if ($request->ajax()) {
-        // Get request parameters
-        $status       = $request->get('status', 'Pending');
-        $userRole     = $request->get('userRole', 'user'); // default 'user'
-        $department   = $request->get('department', null);
-        $biometricId  = $this->biometricHistoryList->getLoadedRecordId();
 
-        // Build query
-        $data = Overtime::query()
-            // Always filter by status if not 'all'
-            ->when($status !== 'all', fn($q) => $q->where('status', $status))
-            // Always filter by biometric import ID
-            ->when($biometricId, fn($q) => $q->where('biometric_imports_id', $biometricId));
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            // Get request parameters
+            $status      = $request->get('status', 'Pending');
+            $userRole    = $request->get('userRole', 'user'); // default 'user'
+            $department  = $request->get('department');
+            $biometricId = $this->biometricHistoryList->getLoadedRecordId();
 
-        // Filter by department only if userRole is 'user'
-        if ($userRole === 'user' && $department) {
-            $data->where('department', $department);
+            // Build query
+            $data = Overtime::query()
+                // Filter by status if not 'all'
+                ->when($status !== 'all', fn($q) => $q->where('status', $status))
+                // Always filter by biometric import ID if available
+                ->when($biometricId, fn($q) => $q->where('biometric_imports_id', $biometricId));
+
+            // Filter by department only if userRole is 'user'
+            if ($userRole === 'user' && $department) {
+                $data->where('department', $department);
+            }
+
+            // Order by first name
+            $data->orderBy('first_name', 'asc');
+
+            // Return results for DataTables
+            return DataTables::of($data)->make(true);
         }
-
-        $data->orderBy('first_name', 'asc');
-
-        return DataTables::of($data)->make(true);
+        return view('overtime.fetch');
     }
-
-    return view('overtime.fetch');
-}
-
 
     public function approve($id)
     {
